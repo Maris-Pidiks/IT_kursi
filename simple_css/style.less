@@ -1,0 +1,167 @@
+@blue1: #3295ff;
+@blue2: #0056b3;
+@blue3: #007bff;
+
+/* General Styles */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  color: #333;
+  background-color: #f8f9fa;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 700;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header Section */
+.header {
+  background-color: @blue1;
+  padding: 20px 0;
+  color: #fff;
+}
+
+.logo {
+  margin-right: 15px;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+.nav {
+  a {
+    margin: 0 15px;
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+.auth-buttons {
+  a {
+    margin-left: 15px;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+
+  .join-pro {
+    background-color: @blue2;
+    border: none;
+  }
+}
+
+/* Hero Section */
+.hero {
+  padding: 100px 20px;
+  background: @blue3;
+  color: #fff;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin: 20px 0;
+}
+
+.search-bar {
+  margin: 30px auto;
+  max-width: 500px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Projects Section */
+.projects {
+  background-color: #fff;
+  padding: 60px 20px;
+  text-align: center;
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  p {
+    margin: 20px auto;
+    max-width: 600px;
+    color: #666;
+  }
+}
+
+.testimonial {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+}
+
+/* Content Section */
+.content {
+  padding: 60px 20px;
+  background-color: #f1f5f9;
+  text-align: center;
+  margin-bottom: 30px;
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .content-header {
+    margin-bottom: 30px;
+    min-width: 300px;
+  }
+
+  .browse-link {
+    color: @blue3;
+    text-decoration: none;
+  }
+}
+
+.card-grid {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+  overflow: auto;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  width: 100%;
+  min-width: 200px;
+  height: 150px;
+}
