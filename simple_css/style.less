@@ -5,14 +5,20 @@
 /* General Styles */
 html,
 body {
+  --btn-color: #3565e3;
+  --bg-light: #f3f4f6;
+  --bg-dark: #dadada;
+  --footer-color: rgb(31 41 55);
   margin: 0;
   padding: 0;
+  font-size: 16px;
 }
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
   color: #333;
   background-color: #f8f9fa;
+  min-width: 367px;
 }
 
 h1,
@@ -164,4 +170,165 @@ h3 {
   width: 100%;
   min-width: 200px;
   height: 150px;
+}
+
+/* My styles */
+
+/* my flex section */
+
+.gap {
+  gap: 40px;
+}
+
+.my_section {
+  background-color: var(--bg-light);
+}
+
+.my_section_2 {
+  background-color: var(--bg-dark);
+  .flex-row-reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+.my_section,
+.my_section_2 {
+  .container {
+    padding: 90px 20px;
+    display: flex;
+  }
+  .my_text_block {
+    flex: 60%;
+    padding: 0;
+  }
+  .my_img_block {
+    flex: 40%;
+  }
+  .my_img_block img {
+    width: 100%;
+  }
+  .my_headline_h4 {
+    font-size: 2rem;
+    padding: 10px 0;
+    margin: 0;
+    color: var(--footer-color);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .my_section .container,
+  .my_section_2 .container {
+    padding: 80px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .my_headline_h4 {
+    text-align: center;
+  }
+  .my_text_block {
+    flex: 100%;
+    padding: 0;
+  }
+  .my_img_block {
+    width: 60%;
+  }
+  .my_img_block img {
+    flex: 100%;
+  }
+}
+
+/* my grid section */
+
+.my_grid_section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  .my_card {
+    width: 100%;
+    text-align: center;
+  }
+  .my_card img {
+    width: 100%;
+  }
+  h5 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #1d1e1f;
+    text-align: center;
+  }
+  figcaption {
+    margin: 5px 0 25px;
+    font-size: 14px;
+    font-style: italic;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .my_grid_section .my_card img {
+    width: 60%;
+  }
+}
+
+/* my footer section */
+
+.my_footer {
+  background-color: #dadada;
+  .footer_grid_container {
+    padding: 50px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 4fr 4fr;
+    grid-template-rows: auto;
+  }
+  .logo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    margin-top: -6px;
+  }
+  .my_footer_nav {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .my_footer_nav a {
+    text-decoration: none;
+    padding-bottom: 7px;
+  }
+  .my_footer_nav a:hover {
+    text-decoration: underline;
+  }
+  h6.footer_headline {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0 0 10px 0;
+  }
+  p {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .my_footer .footer_grid_container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+  }
+  .logo {
+    justify-self: center;
+  }
+}
+
+/* copyright */
+
+.copyright {
+  height: 50px;
+  background-color: var(--footer-color);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
 }
