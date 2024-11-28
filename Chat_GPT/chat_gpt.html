@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechStore - Electronics Shop</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Custom styles for the website */
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .hero-section {
+        background-color: #cccccc;
+        color: white;
+        padding: 100px 0;
+      }
+
+      .hero-section h1 {
+        font-size: 3rem;
+        font-weight: bold;
+      }
+
+      .hero-section .btn {
+        margin-top: 30px;
+      }
+
+      .card-img-top {
+        height: 200px;
+        background-color: #cccccc;
+      }
+
+      .card-title {
+        font-size: 1.25rem;
+      }
+
+      .card-text {
+        font-size: 1rem;
+        color: #555;
+      }
+
+      .advertisement {
+        background-color: #f8f9fa;
+      }
+
+      .cta {
+        background-color: #007bff;
+        color: white;
+      }
+
+      footer {
+        background-color: #333;
+        color: white;
+        padding: 20px 0;
+      }
+
+      .product-img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .product-card {
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .product-card:hover {
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">TechStore</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#products">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section text-center">
+      <div class="container">
+        <h1 class="display-4">Welcome to TechStore</h1>
+        <p>Your one-stop shop for the latest electronics</p>
+        <a href="#products" class="btn btn-primary btn-lg">Shop Now</a>
+      </div>
+    </header>
+
+    <!-- Call to Action (CTA) Section -->
+    <section class="cta text-center py-5">
+      <div class="container">
+        <h2>Get Exclusive Deals!</h2>
+        <p>
+          Sign up for our newsletter to stay updated with the latest offers and discounts.
+        </p>
+        <a href="#contact" class="btn btn-light btn-lg">Sign Up</a>
+      </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="container py-5">
+      <h2 class="text-center mb-4">Featured Products</h2>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" alt="Smartphone" />
+            <div class="card-body">
+              <h5 class="card-title">Smartphone X100</h5>
+              <p class="card-text">
+                The latest mobile tech with 5G support and excellent battery life.
+              </p>
+              <a href="#" class="btn btn-primary">View Product</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" alt="Laptop" />
+            <div class="card-body">
+              <h5 class="card-title">Laptop Z500</h5>
+              <p class="card-text">
+                Powerful performance for work and play with a sleek design.
+              </p>
+              <a href="#" class="btn btn-primary">View Product</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" alt="Headphones" />
+            <div class="card-body">
+              <h5 class="card-title">Wireless Headphones</h5>
+              <p class="card-text">
+                Experience immersive sound with long-lasting comfort for hours of
+                listening.
+              </p>
+              <a href="#" class="btn btn-primary">View Product</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Advertisement Section -->
+    <section class="advertisement text-center py-5">
+      <div class="container">
+        <h2>Special Offer: Save 20% on All Accessories</h2>
+        <p>Get amazing deals on mobile cases, chargers, headphones, and more!</p>
+        <a href="#products" class="btn btn-warning btn-lg">Shop Accessories</a>
+      </div>
+    </section>
+
+    <!-- Product Catalog Section  -->
+    <section id="products" class="container py-5">
+      <h2 class="text-center mb-4">Our Product Catalog</h2>
+      <div class="row row-cols-2 row-cols-md-4 g-4">
+        <!-- Repeat product cards -->
+        <div class="col">
+          <div class="card product-card">
+            <img class="card-img-top" alt="Smartwatch" />
+            <div class="card-body">
+              <h5 class="card-title">Smartwatch</h5>
+              <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card product-card">
+            <img class="card-img-top" alt="Action Camera" />
+            <div class="card-body">
+              <h5 class="card-title">Action Camera</h5>
+              <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card product-card">
+            <img class="card-img-top" alt="Bluetooth Speaker" />
+            <div class="card-body">
+              <h5 class="card-title">Bluetooth Speaker</h5>
+              <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card product-card">
+            <img class="card-img-top" alt="Smart TV" />
+            <div class="card-body">
+              <h5 class="card-title">Smart TV</h5>
+              <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card product-card">
+            <img class="card-img-top" alt="Smartwatch" />
+            <div class="card-body">
+              <h5 class="card-title">Smartwatch</h5>
+              <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card product-card">
+            <img class="card-img-top" alt="Action Camera" />
+            <div class="card-body">
+              <h5 class="card-title">Action Camera</h5>
+              <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card product-card">
+            <img class="card-img-top" alt="Bluetooth Speaker" />
+            <div class="card-body">
+              <h5 class="card-title">Bluetooth Speaker</h5>
+              <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card product-card">
+            <img class="card-img-top" alt="Smart TV" />
+            <div class="card-body">
+              <h5 class="card-title">Smart TV</h5>
+              <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card product-card">
+            <img class="card-img-top" alt="Smartwatch" />
+            <div class="card-body">
+              <h5 class="card-title">Smartwatch</h5>
+              <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card product-card">
+            <img class="card-img-top" alt="Action Camera" />
+            <div class="card-body">
+              <h5 class="card-title">Action Camera</h5>
+              <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card product-card">
+            <img class="card-img-top" alt="Bluetooth Speaker" />
+            <div class="card-body">
+              <h5 class="card-title">Bluetooth Speaker</h5>
+              <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card product-card">
+            <img class="card-img-top" alt="Smart TV" />
+            <div class="card-body">
+              <h5 class="card-title">Smart TV</h5>
+              <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Advertisement Section -->
+    <section class="advertisement text-center py-5">
+      <div class="container">
+        <h2>Huge Sale on Smartwatches & Accessories</h2>
+        <p>Don't miss out! Limited time offers on top brands!</p>
+        <a href="#products" class="btn btn-warning btn-lg">Shop Now</a>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container py-5">
+      <h2 class="text-center mb-4">Contact Us</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <h5>Our Store</h5>
+          <p>
+            Visit us at:
+            <br />
+            123 TechStreet, Silicon Valley, CA
+            <br />
+
+            <strong>Phone:</strong>
+            (123) 456-7890
+            <br />
+
+            <strong>Email:</strong>
+            contact@techstore.com
+          </p>
+        </div>
+        <div class="col-md-6">
+          <h5>Follow Us</h5>
+          <p>Stay connected with us on social media!</p>
+          <div>
+            <a href="#" class="btn btn-dark me-2">Facebook</a>
+            <a href="#" class="btn btn-dark me-2">Instagram</a>
+            <a href="#" class="btn btn-dark">Twitter</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light text-center">
+      <p>&copy; 2024 TechStore | All Rights Reserved</p>
+    </footer>
+
+    <!-- Bootstrap 5 JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
