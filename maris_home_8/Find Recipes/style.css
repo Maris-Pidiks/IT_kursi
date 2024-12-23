@@ -1,0 +1,22 @@
+body {
+  background-color: #eeedee;
+  overflow-y: scroll;
+}
+
+.form-control {
+  margin-right: 20px;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+.card-body {
+  padding: 1rem;
+}
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.search-container {
+  margin-top: 20px;
+}
