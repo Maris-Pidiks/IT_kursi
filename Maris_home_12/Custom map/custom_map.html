@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Festival territory map with custom markers</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+      #map {
+        height: 100vh;
+      }
+      .leaflet-popup-content {
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        font-size: 18px;
+        font-weight: bold;
+        color: #6a1093;
+        padding: 5px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Festival territory map with custom markers</h1>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+      // Map initialization
+      const map = L.map("map").setView([56.941895670535615, 24.097220912949172], 19);
+
+      // Adding OpenStreetMap tiles
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 40,
+        attribution: "© OpenStreetMap contributors",
+      }).addTo(map);
+
+      // SVG Image overlay
+      const imageUrl = "bg.svg";
+      const imageBounds = [
+        [56.942553, 24.096453],
+        [56.941513, 24.098025],
+      ];
+      L.imageOverlay(imageUrl, imageBounds).addTo(map);
+
+      // Custom icon
+      const baseIconSize = {
+        circus: [100, 84],
+        candy: [110, 98],
+        sound: [80, 101],
+        glasses: [80, 101],
+      };
+
+      const circusIcon = L.icon({
+        iconUrl: "circus.svg",
+        iconSize: baseIconSize.circus,
+        iconAnchor: [baseIconSize.circus[0] / 2, baseIconSize.circus[1] / 2],
+        popupAnchor: [0, -baseIconSize.circus[1] / 2],
+      });
+
+      const candyIcon = L.icon({
+        iconUrl: "candy.svg",
+        iconSize: baseIconSize.candy,
+        iconAnchor: [baseIconSize.candy[0] / 2, baseIconSize.candy[1] / 2],
+        popupAnchor: [0, -baseIconSize.candy[1] / 2],
+      });
+
+      const soundIcon = L.icon({
+        iconUrl: "sound.svg",
+        iconSize: baseIconSize.sound,
+        iconAnchor: [baseIconSize.sound[0] / 2, baseIconSize.sound[1] / 2],
+        popupAnchor: [0, -baseIconSize.sound[1] / 2],
+      });
+
+      const glassesIcon = L.icon({
+        iconUrl: "glases.svg",
+        iconSize: baseIconSize.glasses,
+        iconAnchor: [baseIconSize.glasses[0] / 2, baseIconSize.glasses[1] / 2],
+        popupAnchor: [0, -baseIconSize.glasses[1] / 2],
+      });
+
+      // Markers with custom icons
+      const marker1 = L.marker([56.942068, 24.096993], { icon: circusIcon })
+        .addTo(map)
+        .bindPopup("Flying Circus");
+      const marker2 = L.marker([56.941862, 24.097081], { icon: candyIcon })
+        .addTo(map)
+        .bindPopup("Local Candy");
+      const marker3 = L.marker([56.941957, 24.097432], { icon: soundIcon })
+        .addTo(map)
+        .bindPopup("Music Scene");
+      const marker4 = L.marker([56.941751, 24.097623], { icon: glassesIcon })
+        .addTo(map)
+        .bindPopup("Carnival Glasses");
+
+      // Coordinates on map click
+
+      // // Массив для хранения координат
+      // const coordinates = [];
+      // let polyline = null; // Переменная для линии
+
+      // // Обработчик клика на карту
+      // map.on("click", function (e) {
+      //   // Получение координат из события клика
+      //   const { lat, lng } = e.latlng;
+
+      //   // Добавление координат в массив
+      //   coordinates.push([lat, lng]);
+
+      //   // Обновление или создание линии
+      //   if (polyline) {
+      //     polyline.setLatLngs(coordinates); // Обновляем линию
+      //   } else {
+      //     polyline = L.polyline(coordinates, { color: "blue" }).addTo(map); // Создаем линию
+      //   }
+
+      //   // Текст для отображения всех координат
+      //   const coordinatesText = coordinates
+      //     .map((coord) => `[${coord[0].toFixed(6)}, ${coord[1].toFixed(6)}]`)
+      //     .join(",<br>");
+
+      //   // Добавление маркера на карту
+      //   L.marker([lat, lng])
+      //     .addTo(map)
+      //     .bindPopup(`<b>Все точки:</b><br>${coordinatesText}`)
+      //     .openPopup();
+
+      //   // Отображение массива координат в консоли
+      //   console.log(coordinates);
+      // });
+
+      // Show popup on hover function
+      function showPopupOnHover(marker) {
+        marker.on("mouseover", function () {
+          marker.openPopup();
+        });
+        marker.on("mouseout", function () {
+          marker.closePopup();
+        });
+      }
+
+      // show popu on markers hover
+      showPopupOnHover(marker1);
+      showPopupOnHover(marker2);
+      showPopupOnHover(marker3);
+      showPopupOnHover(marker4);
+    </script>
+  </body>
+</html>

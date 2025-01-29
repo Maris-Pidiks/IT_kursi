@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Forecast</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- card -->
+      <h1>Weather Forecast</h1>
+      <div class="searchForm">
+        <input
+          class="input"
+          type="text"
+          placeholder="enter city name"
+          spellcheck="false"
+        />
+        <button class="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+      <div class="weather"></div>
+    </div>
+
+    <!-- Current Weather Template -->
+    <script type="text/template" id="current-weather-template">
+      <div class="current-weather">
+        <img src="{{icon}}" alt="weather icon" class="weather-icon" style="width: 100px; height: 100px;">
+        <h1 class="temp">{{temp}}°C</h1>
+        <h2 class="city">{{city}}</h2>
+        <div class="details">
+          <div class="col">
+            <i class="fa-solid fa-droplet"></i>
+            <div>
+              <p>Humidity</p>
+              <p class="humidity">{{humidity}}%</p>
+            </div>
+          </div>
+          <div class="col">
+            <i class="fa-solid fa-wind"></i>
+            <div>
+              <p>Wind Speed</p>
+              <p class="wind">{{windSpeed}} km/h</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <!-- Hour Forecast Template -->
+    <script type="text/template" id="hour-forecast-template">
+      <div class="hour-forecast">
+        <span class="hour-time">{{hourTime}}</span>
+        <img src="{{icon}}" alt="weather icon" class="hour-icon">
+        <span class="hour-temp">{{temp}}°C</span>
+      </div>
+    </script>
+
+    <!-- Forecast Section Template -->
+    <script type="text/template" id="forecast-section-template">
+      <div class="forecast-section">
+        <h3>14-Day Forecast</h3>
+        <div class="tabs-grid"></div>
+        <div class="forecast-content">
+        </div>
+      </div>
+    </script>
+
+    <script src="main.js"></script>
+  </body>
+</html>
