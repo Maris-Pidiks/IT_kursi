@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spotify Callback</title>
+  </head>
+  <body>
+    <script>
+      // Получаем токен из URL и сохраняем его в localStorage
+      const hash = window.location.hash.substring(1);
+      const params = new URLSearchParams(hash);
+      const accessToken = params.get("access_token");
+
+      if (accessToken) {
+        localStorage.setItem("spotify_access_token", accessToken);
+        window.location.href = "/spotify.html";
+      } else {
+        console.error("Access token not found in URL.");
+      }
+    </script>
+  </body>
+</html>
