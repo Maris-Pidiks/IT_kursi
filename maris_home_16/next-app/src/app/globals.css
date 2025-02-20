@@ -2,13 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom CSS variables */
 :root {
   --background: #ffffff;
   --foreground: #dedddd;
   --text: #414141;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --background: #cecece;
     --foreground: #eae8e8;

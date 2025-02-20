@@ -1,7 +1,5 @@
+import Content from "../../components/Content";
+
 export default function Recipes() {
-  return (
-    <div>
-      <h1>Recipes</h1>
-    </div>
-  );
+  return <Content />;
 }
