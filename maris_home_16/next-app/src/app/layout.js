@@ -23,8 +23,8 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <nav>
           <Link href="/"> Home </Link>
-          <Link href="/Recipes"> Recipes </Link>
-          <Link href="/Githubusers"> Githubusers </Link>
+          <Link href="/pages/Recipes"> Recipes </Link>
+          <Link href="/pages/Githubusers"> Githubusers </Link>
         </nav>
         {children}
       </body>
