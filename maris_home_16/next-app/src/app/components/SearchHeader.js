@@ -5,8 +5,8 @@ function Header() {
   return (
     <div className=" mx-auto flex justify-center min-h-screen bg-base-200">
       <div className="text-center">
-        <div className=" max-w-7xl py-9">
-          <h1 className="text-5xl font-bold mt-5 mb-4">Search for Recipes</h1>
+        <div className="max-w-8xl py-9">
+          <h1 className="text-5xl font-bold mt-5 mb-2">Search for Recipes</h1>
           <SearchRecipes />
         </div>
       </div>
