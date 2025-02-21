@@ -1,5 +1,9 @@
-import Content from "../../components/Content";
+import SearchHeader from "../../components/SearchHeader";
 
 export default function Recipes() {
-  return <Content />;
+  return (
+    <>
+      <SearchHeader />
+    </>
+  );
 }
