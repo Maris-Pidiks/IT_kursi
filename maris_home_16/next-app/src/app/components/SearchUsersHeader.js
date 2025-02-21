@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import ResultUsers from "./ResultUsers";
 
-function SearchUsers() {
+function SearchUsersHeader() {
   const [query, setQuery] = useState("");
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
@@ -53,4 +53,4 @@ function SearchUsers() {
   );
 }
 
-export default SearchUsers;
+export default SearchUsersHeader;
