@@ -52,7 +52,9 @@ export default function Navbar() {
             </li>
           </ul>
         </div>
-        <Image src="/assets/next.svg" alt="Logo" width={120} height={120} />
+        <Link href="/">
+          <Image src="/assets/next.svg" alt="Logo" width={120} height={120} />
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">

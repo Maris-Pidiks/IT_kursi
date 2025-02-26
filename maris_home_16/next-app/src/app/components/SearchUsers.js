@@ -30,7 +30,6 @@ function SearchUsers() {
       <div className="flex justify-center mb-4">
         <input
           type="text"
-          value={query}
           onChange={(e) => setQuery(e.target.value)}
           className="input input-bordered w-full max-w-md"
           placeholder="Search for users"

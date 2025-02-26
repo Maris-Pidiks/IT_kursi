@@ -18,14 +18,16 @@ function SearchUsersHeader() {
           setUsers(data.items);
           setError(null);
         }
+        setQuery(""); // Clear the input field after search
       })
       .catch((error) => {
         setError("Error searching users!");
+        setQuery(""); // Clear the input field even if there's an error
       });
   };
 
   return (
-    <div className=" mx-auto flex justify-center min-h-screen bg-base-200">
+    <div className="mx-auto flex justify-center min-h-screen bg-base-200">
       <div className="text-center">
         <div className="max-w-8xl py-9">
           <h1 className="text-5xl font-bold mt-5 mb-10">Search GitHub users</h1>
@@ -35,6 +37,11 @@ function SearchUsersHeader() {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
               className="input input-bordered w-full max-w-md"
               placeholder="Search for users"
             />
