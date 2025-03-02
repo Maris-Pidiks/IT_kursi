@@ -1,17 +1,17 @@
-// filepath: /Users/webdev/Desktop/GitRepos/IT_kursi/maris_home_16/next-app/src/app/components/SearchUsersHeader.js
+// filepath: /Users/webdev/Desktop/GitRepos/IT_kursi/maris_home_16/next-app/src/app/components/SearchWeather.js
 "use client";
 import React, { useState } from "react";
-import ResultUsers from "./ResultUsers";
+import ResultWeather from "./ResultWeather";
 import { handleSearch } from "../utils/handleSearch";
 
-function SearchUsersHeader() {
+function SearchWeather() {
   const [query, setQuery] = useState("");
-  const [users, setUsers] = useState([]);
+  const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
 
   const handleSearchClick = () => {
-    const url = "https://api.github.com/search/users";
-    handleSearch(url, query, setUsers, setError);
+    const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${query}?key=SSNZEMK7VV6FBH4MBW8LZJM6T`;
+    handleSearch(url, query, setWeatherData, setError);
     setQuery(""); // Clear the input field after search
   };
 
@@ -19,9 +19,9 @@ function SearchUsersHeader() {
     <div className="mx-auto flex justify-center min-h-screen bg-base-200">
       <div className="text-center">
         <div className="max-w-8xl py-9">
-          <h1 className="text-5xl font-bold mt-5 mb-10">Search GitHub users</h1>
+          <h1 className="text-5xl font-bold mt-5 mb-10">Search Weather</h1>
 
-          <div className="flex justify-center mb-11">
+          <div className="flex justify-center mb-6">
             <input
               type="text"
               value={query}
@@ -32,7 +32,7 @@ function SearchUsersHeader() {
                 }
               }}
               className="input input-bordered w-full max-w-md"
-              placeholder="Search for users"
+              placeholder="Enter city"
             />
             <button
               className="btn btn-success text-white ml-2"
@@ -44,7 +44,7 @@ function SearchUsersHeader() {
           {error !== null ? (
             <p className="text-error text-center mt-4">{error}</p>
           ) : (
-            <ResultUsers users={users} />
+            <ResultWeather weatherData={weatherData} />
           )}
         </div>
       </div>
@@ -52,4 +52,4 @@ function SearchUsersHeader() {
   );
 }
 
-export default SearchUsersHeader;
+export default SearchWeather;

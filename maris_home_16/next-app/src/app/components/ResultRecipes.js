@@ -13,10 +13,10 @@ function ResultRecipes({ recipes }) {
                 <img src={recipe.strMealThumb} alt={recipe.strMeal} />
               </figure>
               <div className="card-body justify-center">
-                <h2 className="card-title justify-center text-2xl leading-tight">
+                <h2 className="card-title text-center text-2xl leading-tight">
                   {recipe.strMeal}
                 </h2>
-                <p className="text-sm">
+                <p className="text-sm text-center">
                   <strong>Category:</strong> {recipe.strCategory}
                   <br />
                   <strong>Area:</strong> {recipe.strArea}
