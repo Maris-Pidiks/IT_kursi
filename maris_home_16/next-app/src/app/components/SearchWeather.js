@@ -1,7 +1,7 @@
-// filepath: /Users/webdev/Desktop/GitRepos/IT_kursi/maris_home_16/next-app/src/app/components/SearchWeather.js
 "use client";
 import React, { useState } from "react";
 import ResultWeather from "./ResultWeather";
+import ResultWeatherDays from "./ResultWeatherDays";
 import { handleSearch } from "../utils/handleSearch";
 
 function SearchWeather() {
@@ -21,7 +21,7 @@ function SearchWeather() {
         <div className="max-w-8xl py-9">
           <h1 className="text-5xl font-bold mt-5 mb-10">Search Weather</h1>
 
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-11">
             <input
               type="text"
               value={query}
@@ -44,7 +44,10 @@ function SearchWeather() {
           {error !== null ? (
             <p className="text-error text-center mt-4">{error}</p>
           ) : (
-            <ResultWeather weatherData={weatherData} />
+            <>
+              <ResultWeather weatherData={weatherData} />
+              <ResultWeatherDays weatherData={weatherData} />
+            </>
           )}
         </div>
       </div>

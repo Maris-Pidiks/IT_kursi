@@ -1,6 +1,7 @@
+// filepath: /Users/webdev/Desktop/GitRepos/IT_kursi/maris_home_16/next-app/src/app/components/WeatherIcons.js
 import React from "react";
 
-const WeatherIcons = ({ condition }) => {
+const WeatherIcons = ({ condition, width = 40, height = 40 }) => {
   const getIconUrl = (condition) => {
     const iconMap = {
       "clear-day": "clear-day",
@@ -19,11 +20,7 @@ const WeatherIcons = ({ condition }) => {
   };
 
   return (
-    <img
-      src={getIconUrl(condition)}
-      alt={condition}
-      style={{ width: "200px", height: "200px" }}
-    ></img>
+    <img src={getIconUrl(condition)} alt={condition} width={width} height={height} />
   );
 };
 
