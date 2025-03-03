@@ -12,12 +12,10 @@ function ResultWeather({ weatherData }) {
 
   return (
     <div className="container mx-auto px-20">
-      <div className="card bg-base-100 shadow-xl w-4/5xl w-full-md mx-auto mt-10 mb-10 justify-center">
+      <div className="card bg-base-100 shadow-xl mx-auto mt-10 mb-10 justify-center align-middle">
         <div className="card-body flex flex-row items-center">
           <div
             style={{
-              width: "200px",
-              height: "200px",
               marginRight: "5%",
               marginLeft: "5%",
               display: "flex",
@@ -25,7 +23,7 @@ function ResultWeather({ weatherData }) {
               alignItems: "center",
             }}
           >
-            <WeatherIcons condition={condition} />
+            <WeatherIcons condition={condition} size="large" />
           </div>
           <div className="flex-col place-items-start">
             <h2 className="card-title uppercase text-3xl mb-5">{weatherData.address}</h2>

@@ -1,3 +1,4 @@
+// filepath: /Users/webdev/Desktop/GitRepos/IT_kursi/maris_home_16/next-app/src/app/components/ResultWeatherHours.js
 import React from "react";
 import WeatherIcons from "./WeatherIcons";
 
@@ -12,26 +13,24 @@ const ResultWeatherHours = ({ hours }) => {
   };
 
   return (
-    <div className="container mx-auto px-1">
-      <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-4 mb-10">
-        {hours.map((hour, index) => {
-          const tempCelsius = ((hour.temp - 32) * 5) / 9;
-          return (
-            <div key={index} className="card bg-base-100 shadow-xl">
-              <div className="card-body flex flex-col items-center justify-between gap-0 p-4">
-                <WeatherIcons condition={hour.icon} />
-                <div className="flex-grow"></div>
-                <h2 className="card-title text-xl font-bold mt-3">
-                  {formatTime(hour.datetime)}
-                </h2>
-                <p className="text-xl font-bold text-green-500">
-                  {Math.round(tempCelsius)}°C
-                </p>
-              </div>
+    <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-10 gap-4 px-20 mb-20 max-w-7xl">
+      {hours.map((hour, index) => {
+        const tempCelsius = ((hour.temp - 32) * 5) / 9;
+        return (
+          <div key={index} className="card bg-base-100 shadow-xl p-4">
+            <div className="card-body flex flex-col items-center justify-end gap-0 p-4">
+              <h2 className="card-title text-xl font-bold mt-3">
+                {formatTime(hour.datetime)}
+              </h2>
+              <WeatherIcons condition={hour.icon} size="small" />
+
+              <p className="text-2xl text-bold text-green-600">
+                {Math.round(tempCelsius)}°C
+              </p>
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
