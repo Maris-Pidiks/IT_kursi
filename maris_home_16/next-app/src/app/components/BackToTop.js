@@ -27,7 +27,7 @@ const BackToTopBtn = () => {
     isVisible && (
       <button
         onClick={scrollToTop}
-        className="btn btn-success btn-xl text-white hover:bg-green-700 transition-all fixed bottom-4 right-4 shadow-lg"
+        className="btn btn-success btn-xl text-white hover:bg-green-700 transition-all fixed bottom-8 right-8 shadow-lg"
         aria-label="Back to Top"
       >
         Back to Top

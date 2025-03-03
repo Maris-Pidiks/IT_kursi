@@ -21,7 +21,7 @@ const WeatherIcons = ({ condition, size }) => {
   const iconSize = {
     large: "200px",
     medium: "60px",
-    small: "40px",
+    small: "30px",
   };
 
   return (

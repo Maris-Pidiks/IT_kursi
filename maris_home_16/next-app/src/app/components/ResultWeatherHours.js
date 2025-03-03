@@ -17,14 +17,14 @@ const ResultWeatherHours = ({ hours }) => {
       {hours.map((hour, index) => {
         const tempCelsius = ((hour.temp - 32) * 5) / 9;
         return (
-          <div key={index} className="card bg-base-100 shadow-xl p-4">
+          <div key={index} className="card bg-base-100 shadow-xl p-1">
             <div className="card-body flex flex-col items-center justify-end gap-0 p-4">
-              <h2 className="card-title text-xl font-bold mt-3">
+              <h2 className="card-title text-sm font-bold my-1">
                 {formatTime(hour.datetime)}
               </h2>
               <WeatherIcons condition={hour.icon} size="small" />
 
-              <p className="text-2xl text-bold text-green-600">
+              <p className="text-3sm text-bold text-green-600 my-1">
                 {Math.round(tempCelsius)}°C
               </p>
             </div>
