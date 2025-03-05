@@ -1,9 +1,9 @@
-import SearchHeader from "../../components/SearchHeader";
+import SearchRecipesOld from "../../components/SearchRecipesOld";
 
 export default function Recipes() {
   return (
     <>
-      <SearchHeader />
+      <SearchRecipesOld />
     </>
   );
 }

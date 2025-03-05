@@ -1,17 +1,18 @@
 import React from "react";
-import SearchRecipes from "./SearchRecipes";
+import SearchHeadline from "./SearchHeadline";
+import SearchForm from "./SearchForm";
 
-function Header() {
+function SearchHeader() {
   return (
-    <div className=" mx-auto flex justify-center min-h-screen bg-base-200">
-      <div className="text-center">
-        <div className="max-w-8xl py-9">
-          <h1 className="text-5xl font-bold mt-5 mb-2">Search for Recipes</h1>
-          <SearchRecipes />
-        </div>
+    <div class="flex flex-col justify-center">
+      <h1 class="justify-center text-5xl font-bold text-center mt-16 mb-0">
+        {"Weather forecast"}
+      </h1>
+      <div className="flex flex-col w-full justify-start mt-8 mb-10">
+        <SearchForm />
       </div>
     </div>
   );
 }
 
-export default Header;
+export default SearchHeader;

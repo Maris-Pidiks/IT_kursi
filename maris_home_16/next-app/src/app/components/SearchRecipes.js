@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import SearchButtons from "./SearchButtons";
 import ResultRecipes from "./ResultRecipes";
+import SearchHeadline from "./SearchHeadline";
 
 function Search() {
   const [query, setQuery] = useState("");
@@ -24,23 +25,29 @@ function Search() {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="flex justify-center my-4">
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="input input-bordered w-full max-w-md"
-          placeholder="Search for recipes"
+    <div className="container w-full max-w-full mx-auto p-4 flex justify-center min-h-screen bg-base-200 px-5 md:px-20">
+      <div className="max-w-8xl py-9">
+        <SearchHeadline
+          className="text-5xl font-bold mt-5 mb-10"
+          title={"Search Recipes"}
         />
-        <button className="btn btn-success text-white ml-2" onClick={handleSearch}>
-          Search
-        </button>
+        <div className="flex justify-center my-4">
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="input input-bordered w-full max-w-md"
+            placeholder="Search for recipes"
+          />
+          <button className="btn btn-success text-white ml-2" onClick={handleSearch}>
+            Search
+          </button>
+        </div>
+        <div className="flex justify-center mb-4">
+          <SearchButtons handleSearchByLetter={handleSearchByLetter} />
+        </div>
+        <ResultRecipes recipes={recipes} />
       </div>
-      <div className="flex justify-center mb-4">
-        <SearchButtons handleSearchByLetter={handleSearchByLetter} />
-      </div>
-      <ResultRecipes recipes={recipes} />
     </div>
   );
 }

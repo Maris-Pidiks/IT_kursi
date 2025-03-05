@@ -50,14 +50,22 @@ export default function Navbar() {
                 Recipes
               </Link>
             </li>
+            <li>
+              <Link
+                href="/pages/Weather"
+                className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
+              >
+                Weather
+              </Link>
+            </li>
           </ul>
         </div>
         <Link href="/">
-          <Image src="/assets/next.svg" alt="Logo" width={120} height={120} />
+          <Image src="/assets/next.svg" alt="Logo" width={120} height={200} />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 mr-5">
           <li>
             <Link
               href="/"
@@ -80,6 +88,14 @@ export default function Navbar() {
               className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
             >
               Recipes
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/pages/Weather"
+              className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
+            >
+              Weather
             </Link>
           </li>
         </ul>
