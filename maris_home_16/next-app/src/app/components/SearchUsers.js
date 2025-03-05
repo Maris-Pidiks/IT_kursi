@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import SearchUsersHeader from "./SearchUsersHeader";
 import ResultUsers from "./ResultUsers";
-import HandleSearch from "./HandleSearch";
 
 function SearchUsers() {
   const [query, setQuery] = useState("");
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
 
-  const url = `https://api.github.com/search/users?q=${query}`;
-
   const handleSearch = () => {
+    const url = `https://api.github.com/search/users?q=${query}`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {

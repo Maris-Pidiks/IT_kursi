@@ -19,7 +19,7 @@ const WeatherIcons = ({ condition, size }) => {
   };
 
   const iconSize = {
-    large: "200px",
+    large: "150px",
     medium: "60px",
     small: "30px",
   };

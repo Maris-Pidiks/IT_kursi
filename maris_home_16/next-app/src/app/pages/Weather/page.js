@@ -4,9 +4,9 @@ import ResultWeatherDays from "../../components/ResultWeatherDays";
 
 export default function Weather() {
   return (
-    <div>
-      <SearchWeather />
-      <ResultWeatherDays />
+    <div className="min-w-sm mx-auto">
+      <SearchWeather className="px-20" />
+      <ResultWeatherDays className="px-20" />
     </div>
   );
 }

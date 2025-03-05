@@ -1,4 +1,3 @@
-// filepath: /Users/webdev/Desktop/GitRepos/IT_kursi/maris_home_16/next-app/src/app/components/ResultWeatherDays.js
 "use client";
 
 import React, { useState } from "react";
@@ -32,7 +31,7 @@ const ResultWeatherDays = ({ weatherData }) => {
   const settings = {
     dots: true,
     infinite: false,
-    speed: 900,
+    speed: 500,
     slidesToShow: 5,
     slidesToScroll: 2,
     arrows: true,
@@ -42,21 +41,17 @@ const ResultWeatherDays = ({ weatherData }) => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
-          arrows: true,
         },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 1,
           slidesToScroll: 1,
-          arrows: true,
-          nextArrow: <CustomNextArrow />,
-          prevArrow: <CustomPrevArrow />,
         },
       },
     ],
@@ -108,30 +103,32 @@ const ResultWeatherDays = ({ weatherData }) => {
 
   return (
     <>
-      <Slider {...settings} className="px-20 max-w-7xl mx-auto">
-        {weatherData.days.slice(0, 14).map((day, index) => {
-          const tempCelsius = ((day.temp - 32) * 5) / 9;
-          return (
-            <div key={index} className="p-2">
-              <div
-                className="card bg-base-100 shadow-xl pt-2 p-0 h-60 mb-5 cursor-pointer"
-                onClick={() => handleDayClick(index)}
-              >
-                <div className="card-body flex flex-col items-center p-3">
-                  <h2 className="card-title text-xl font-bold">
-                    {formatDate(day.datetime)}
-                  </h2>
-                  <WeatherIcons condition={day.icon} size="medium" />
-                  <p className="text-2xl text-bold text-green-600">
-                    {Math.round(tempCelsius)}°C
-                  </p>
-                  <p className="text-xs mt-(-4)">{day.description}</p>
+      <div className="container min-w-2xl mx-auto px-4">
+        <Slider {...settings} className="w-full max-w-7xl mx-auto px-20">
+          {weatherData.days.slice(0, 14).map((day, index) => {
+            const tempCelsius = ((day.temp - 32) * 5) / 9;
+            return (
+              <div key={index} className="p-2">
+                <div
+                  className="card h-72 md:h-68 bg-base-100 shadow-xl pt-2 p-0 pb-5 mb-5 cursor-pointer flex flex-col justify-between"
+                  onClick={() => handleDayClick(index)}
+                >
+                  <div className="card-body flex flex-col items-center p-3 h-full">
+                    <h2 className="card-title text-sm md:text-xl font-bold">
+                      {formatDate(day.datetime)}
+                    </h2>
+                    <WeatherIcons condition={day.icon} size="medium" />
+                    <p className="text-3xl font-bold text-green-600">
+                      {Math.round(tempCelsius)}°C
+                    </p>
+                    <p className="text-xs px-4">{day.description}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </Slider>
+            );
+          })}
+        </Slider>
+      </div>
       {selectedDayIndex !== null && (
         <div className="mt-8">
           <div className="flex justify-between items-center mt-20 mb-8 px-20">

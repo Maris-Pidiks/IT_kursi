@@ -25,7 +25,7 @@ function Search() {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container w-full max-w-full mx-auto p-4 flex justify-center min-h-screen bg-base-200 px-5 md:px-20">
       <div className="max-w-8xl py-9">
         <SearchHeadline
           className="text-5xl font-bold mt-5 mb-10"

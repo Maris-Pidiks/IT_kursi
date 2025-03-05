@@ -19,9 +19,9 @@ function SearchWeather() {
     <div className="mx-auto flex justify-center min-h-screen bg-base-200">
       <div className="text-center">
         <div className="max-w-8xl py-9">
-          <h1 className="text-5xl font-bold mt-5 mb-10">Search Weather</h1>
+          <h1 className="text-5xl font-bold mt-5 mb-10 mx-5">Search Weather</h1>
 
-          <div className="flex justify-center mb-11">
+          <div className="flex justify-center mb-11 max-w-3xl w-full mx-auto px-20">
             <input
               type="text"
               value={query}
