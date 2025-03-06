@@ -33,3 +33,20 @@
   width: 24px;
   height: 24px;
 } */
+
+.slick-dots {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  right: 0;
+
+  display: block;
+
+  width: 100%;
+  padding: 0;
+  margin: 0 auto;
+
+  list-style: none;
+
+  text-align: center;
+}
