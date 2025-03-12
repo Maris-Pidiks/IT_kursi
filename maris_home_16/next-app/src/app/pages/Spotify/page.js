@@ -1,10 +1,13 @@
 // filepath: /Users/webdev/Desktop/GitRepos/IT_kursi/maris_home_16/next-app/src/app/pages/Spotify/Spotify.js
-import SearchHeader from "../../components/SearchHeader";
-
+import React from "react";
+import SearchHeadline from "../../components/SearchHeadline";
+import ResultSpotify from "../../components/ResultSpotify";
+import SearchSpotify from "@/app/components/SearchSpotify";
 export default function Spotify() {
   return (
-    <>
-      <SearchHeader />
-    </>
+    <div className="bg-base-100 py-10">
+      <SearchSpotify />
+      <ResultSpotify />
+    </div>
   );
 }

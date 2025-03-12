@@ -31,7 +31,7 @@ function SearchWeather() {
                   handleSearchClick();
                 }
               }}
-              className="input input-bordered w-full max-w-md"
+              className="input input-bordered w-full max-w-md focus:border-success focus:outline-success"
               placeholder="Enter city"
             />
             <button

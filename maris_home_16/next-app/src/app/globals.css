@@ -50,3 +50,8 @@
 
   text-align: center;
 }
+
+input:focus {
+  border-color: theme("colors.success") !important;
+  outline: none; /* Optional: to remove the default outline */
+}

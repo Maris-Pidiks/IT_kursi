@@ -58,6 +58,14 @@ export default function Navbar() {
                 Weather
               </Link>
             </li>
+            <li>
+              <Link
+                href="/pages/Spotify"
+                className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
+              >
+                Spotify
+              </Link>
+            </li>
           </ul>
         </div>
         <Link href="/">
@@ -96,6 +104,14 @@ export default function Navbar() {
               className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
             >
               Weather
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/pages/Spotify"
+              className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
+            >
+              Spotify
             </Link>
           </li>
         </ul>
