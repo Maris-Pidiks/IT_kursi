@@ -4,7 +4,7 @@ export default function Form({ onSubmit, inputValue, onInputChange, placeholder 
   return (
     <form
       onSubmit={onSubmit}
-      className="mx-auto w-500px container text-center mb-4 py-5 flex flex-row align-center justify-center"
+      className="bg-slate-400 mx-auto w-900px container text-center mb-4 py-5 flex flex-row align-center justify-center"
     >
       <div className="form-control">
         <input
