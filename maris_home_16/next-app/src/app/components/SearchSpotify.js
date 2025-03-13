@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import ResultSpotify from "./ResultSpotify";
-import SearchFormContainer from "./SearchFormContainer";
+import Form from "./Form";
 
 const CLIENT_ID = "024078ae9f614aefbbbee63fda1049f9";
 const REDIRECT_URI = "http://localhost:3000/pages/Spotify"; // Ensure this matches the URI in Spotify Developer Dashboard
@@ -153,13 +153,15 @@ export default function SearchSpotify() {
         height={350}
         className="mx-auto my-10"
       />
-      <SearchFormContainer
+
+      <Form
         onSubmit={handleSearch}
         inputValue={artistName}
         onInputChange={(e) => setArtistName(e.target.value)}
         placeholder="Search artist"
         buttonText="Search"
       />
+
       {error && <p className="text-error">{error}</p>}
       <ResultSpotify artist={artist} albums={albums} topTracks={topTracks} />
     </div>
