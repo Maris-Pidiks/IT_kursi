@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
-const PostScheme = new mongoose.Schema(
+const PostSchema = new mongoose.Schema(
   {
-    title: { String, required: true },
-    description: { String, required: true },
-    img: { String },
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    img: { type: String },
   },
   {
     timestamps: true,
   }
 );
 
-export default mongoose.model.Post || mongoose.model("Post", PostScheme);
+export default mongoose.models.Post || mongoose.model("Post", PostSchema);

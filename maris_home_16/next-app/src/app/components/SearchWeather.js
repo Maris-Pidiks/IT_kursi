@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import ResultWeather from "./ResultWeather";
 import ResultWeatherDays from "./ResultWeatherDays";
-import { handleSearch } from "../utils/handleSearch";
+import { handleSearch } from "../../utils/handleSearch";
 
 function SearchWeather() {
   const [query, setQuery] = useState("");
