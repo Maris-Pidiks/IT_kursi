@@ -1,4 +1,3 @@
-// filepath: /Users/webdev/Desktop/GitRepos/IT_kursi/maris_home_16/next-app/src/app/api/posts/route.js
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/utils/mongoose";
 import Post from "@/models/Post";
@@ -9,17 +8,23 @@ export async function GET() {
     const posts = await Post.find();
     return NextResponse.json(posts);
   } catch (error) {
-    console.log("__error", error);
+    console.error("Error fetching data:", error);
+    return NextResponse.json({ error: "Error fetching data" }, { status: 500 });
   }
 }
 
 export async function POST(request) {
-  await connectToDatabase();
+  try {
+    await connectToDatabase();
 
-  const { title, description, img } = await request.json();
-  const newPost = newPost({ title, description, img });
+    const { title, description, img } = await request.json();
+    const newPost = new Post({ title, description, img });
 
-  await newPost.save();
+    await newPost.save();
 
-  return NextResponse.json(newPost);
+    return NextResponse.json(newPost);
+  } catch (error) {
+    console.error("Error creating post:", error);
+    return NextResponse.json({ error: "Error creating post" }, { status: 500 });
+  }
 }

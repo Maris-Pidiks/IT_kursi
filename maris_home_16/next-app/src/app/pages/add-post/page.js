@@ -9,12 +9,12 @@ export default function AddPost() {
   });
 
   const onChangeHandler = (e) =>
-    setFormData({ ...formdata, [e.target.name]: e.target.value }); // onChangeHandler
+    setFormData({ ...formdata, [e.target.name]: e.target.value });
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:3000/api/posts", {
+    const res = await fetch("/api/posts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,14 +22,20 @@ export default function AddPost() {
       body: JSON.stringify(formdata),
     });
 
+    if (!res.ok) {
+      console.error("Error creating post");
+      return;
+    }
+
     const data = await res.json();
     console.log(data);
 
-    console.log("formdata", formdata, data);
-
-    const title = e.target.title.value;
-    const description = e.target.description.value;
-    const img = e.target.img.value;
+    // Clear the form after successful submission
+    setFormData({
+      title: "",
+      description: "",
+      img: "",
+    });
   };
 
   return (
@@ -47,6 +53,7 @@ export default function AddPost() {
             placeholder="Post title"
             className="input input-bordered w-full"
             onChange={onChangeHandler}
+            value={formdata.title}
           />
         </div>
         <div className="form-control mb-4">
@@ -59,6 +66,7 @@ export default function AddPost() {
             placeholder="Description"
             className="input input-bordered w-full"
             onChange={onChangeHandler}
+            value={formdata.description}
           />
         </div>
         <div className="form-control mb-4">
@@ -71,12 +79,13 @@ export default function AddPost() {
             placeholder="Image URL"
             className="input input-bordered w-full"
             onChange={onChangeHandler}
+            value={formdata.img}
           />
         </div>
         <div className="form-control">
           <button
             type="submit"
-            className="btn mt-3 btn-success text-white  hover:bg-green-500 transition-colors min-w-40"
+            className="btn mt-3 btn-success text-white hover:bg-green-500 transition-colors min-w-40"
           >
             Add Post
           </button>
