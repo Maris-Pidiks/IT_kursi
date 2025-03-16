@@ -5,7 +5,7 @@ import Post from "@/models/Post";
 export async function GET() {
   try {
     await connectToDatabase();
-    const posts = await Post.find();
+    const posts = await Post.find({});
     return NextResponse.json(posts);
   } catch (error) {
     console.error("Error fetching data:", error);
