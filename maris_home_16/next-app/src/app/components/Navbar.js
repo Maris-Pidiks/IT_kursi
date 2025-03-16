@@ -74,6 +74,14 @@ export default function Navbar() {
                 Add Post
               </Link>
             </li>
+            <li>
+              <Link
+                href="/blog"
+                className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
+              >
+                Blog
+              </Link>
+            </li>
           </ul>
         </div>
         <Link href="/">
@@ -128,6 +136,14 @@ export default function Navbar() {
               className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
             >
               Add Post
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/blog"
+              className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
+            >
+              Blog
             </Link>
           </li>
         </ul>

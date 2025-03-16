@@ -30,6 +30,14 @@ export default function AddPost() {
     const data = await res.json();
     console.log(data);
 
+    alert("Post created successfully!");
+
+    setFormData({
+      title: "",
+      description: "",
+      img: "",
+    });
+
     // Clear the form after successful submission
     setFormData({
       title: "",
