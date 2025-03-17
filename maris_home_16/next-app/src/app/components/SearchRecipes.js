@@ -36,7 +36,7 @@ function Search() {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="input input-bordered w-full max-w-md"
+            className="input input-bordered w-full max-w-md focus:border-success focus:outline-success"
             placeholder="Search for recipes"
           />
           <button className="btn btn-success text-white ml-2" onClick={handleSearch}>

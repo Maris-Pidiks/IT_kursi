@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import ResultWeather from "./ResultWeather";
 import ResultWeatherDays from "./ResultWeatherDays";
-import { handleSearch } from "../utils/handleSearch";
+import { handleSearch } from "../../utils/handleSearch";
 
 function SearchWeather() {
   const [query, setQuery] = useState("");
@@ -31,7 +31,7 @@ function SearchWeather() {
                   handleSearchClick();
                 }
               }}
-              className="input input-bordered w-full max-w-md"
+              className="input input-bordered w-full max-w-md focus:border-success focus:outline-success"
               placeholder="Enter city"
             />
             <button

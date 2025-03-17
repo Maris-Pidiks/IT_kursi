@@ -42,7 +42,7 @@ function SearchUsersHeader() {
                   handleSearch();
                 }
               }}
-              className="input input-bordered w-full max-w-md"
+              className="input input-bordered w-full max-w-md focus:border-success focus:outline-success"
               placeholder="Search for users"
             />
             <button className="btn btn-success text-white ml-2" onClick={handleSearch}>
