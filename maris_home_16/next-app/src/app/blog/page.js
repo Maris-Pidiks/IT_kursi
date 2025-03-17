@@ -16,7 +16,7 @@ export default async function Blog() {
   const posts = await getData();
 
   return (
-    <div className="container w-max-[600px] mx-auto p-4">
+    <div className="container max-w-2xl mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Blog Posts</h1>
       {
         <div className="grid gap-4">
