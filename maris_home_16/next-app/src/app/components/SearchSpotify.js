@@ -136,7 +136,7 @@ export default function SearchSpotify() {
 
   if (!accessToken) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-base-200">
+      <div className="flex justify-center items-center min-h-screen">
         <button className="btn btn-success" onClick={authorize}>
           Log in with Spotify
         </button>
@@ -145,25 +145,27 @@ export default function SearchSpotify() {
   }
 
   return (
-    <div>
-      <Image
-        src="/assets/Spotify_Full_Logo_RGB_Green.png"
-        alt="Spotify"
-        width={350}
-        height={350}
-        className="mx-auto my-10"
-      />
+    <div className="container mx-auto p-4 min-h-screen bg-base-200">
+      <div className="w-full max-w-4xl mx-auto">
+        <Image
+          src="/assets/Spotify_Full_Logo_RGB_Green.png"
+          alt="Spotify"
+          width={350}
+          height={350}
+          className="mx-auto my-10"
+        />
 
-      <Form
-        onSubmit={handleSearch}
-        inputValue={artistName}
-        onInputChange={(e) => setArtistName(e.target.value)}
-        placeholder="Search artist"
-        buttonText="Search"
-      />
+        <Form
+          onSubmit={handleSearch}
+          inputValue={artistName}
+          onInputChange={(e) => setArtistName(e.target.value)}
+          placeholder="Search artist"
+          buttonText="Search"
+        />
 
-      {error && <p className="text-error">{error}</p>}
-      <ResultSpotify artist={artist} albums={albums} topTracks={topTracks} />
+        {error && <p className="text-error text-center">{error}</p>}
+        <ResultSpotify artist={artist} albums={albums} topTracks={topTracks} />
+      </div>
     </div>
   );
 }

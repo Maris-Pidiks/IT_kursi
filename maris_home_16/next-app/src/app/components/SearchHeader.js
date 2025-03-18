@@ -1,5 +1,4 @@
 import React from "react";
-import SearchHeadline from "./SearchHeadline";
 import SearchForm from "./SearchForm";
 
 function SearchHeader() {

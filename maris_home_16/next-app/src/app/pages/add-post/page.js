@@ -23,7 +23,6 @@ export default function AddPost() {
     });
 
     if (!res.ok) {
-      console.error("Error creating post");
       return;
     }
 
@@ -47,58 +46,60 @@ export default function AddPost() {
   };
 
   return (
-    <div className="container max-w-2xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Add Post</h1>
+    <div className="container w-full max-w-full mx-auto p-4 flex justify-center min-h-screen bg-base-200 px-5 md:px-20">
+      <div className="container max-w-3xl mx-auto p-4">
+        <h1 className="text-5xl font-bold my-10">Add Post</h1>
 
-      <form onSubmit={onSubmitHandler} className="bg-white p-6 rounded-lg shadow-md">
-        <div className="form-control mb-4">
-          <label className="label">
-            <span className="label-text">Post Title</span>
-          </label>
-          <input
-            type="text"
-            name="title"
-            placeholder="Post title"
-            className="input input-bordered w-full"
-            onChange={onChangeHandler}
-            value={formdata.title}
-          />
-        </div>
-        <div className="form-control mb-4">
-          <label className="label">
-            <span className="label-text">Description</span>
-          </label>
-          <input
-            type="text"
-            name="description"
-            placeholder="Description"
-            className="input input-bordered w-full"
-            onChange={onChangeHandler}
-            value={formdata.description}
-          />
-        </div>
-        <div className="form-control mb-4">
-          <label className="label">
-            <span className="label-text">Image URL</span>
-          </label>
-          <input
-            type="text"
-            name="img"
-            placeholder="Image URL"
-            className="input input-bordered w-full"
-            onChange={onChangeHandler}
-            value={formdata.img}
-          />
-        </div>
-        <div className="form-control">
-          <button
-            type="submit"
-            className="btn mt-3 btn-success text-white hover:bg-green-500 transition-colors min-w-40"
-          >
-            Add Post
-          </button>
-        </div>
-      </form>
+        <form onSubmit={onSubmitHandler} className="bg-white p-6 rounded-lg shadow-xl">
+          <div className="form-control mb-4">
+            <label className="label">
+              <span className="label-text">Post Title</span>
+            </label>
+            <input
+              type="text"
+              name="title"
+              placeholder="Post title"
+              className="input input-bordered w-full"
+              onChange={onChangeHandler}
+              value={formdata.title}
+            />
+          </div>
+          <div className="form-control mb-4">
+            <label className="label">
+              <span className="label-text">Description</span>
+            </label>
+            <input
+              type="text"
+              name="description"
+              placeholder="Description"
+              className="input input-bordered w-full"
+              onChange={onChangeHandler}
+              value={formdata.description}
+            />
+          </div>
+          <div className="form-control mb-4">
+            <label className="label">
+              <span className="label-text">Image URL</span>
+            </label>
+            <input
+              type="text"
+              name="img"
+              placeholder="Image URL"
+              className="input input-bordered w-full"
+              onChange={onChangeHandler}
+              value={formdata.img}
+            />
+          </div>
+          <div className="form-control">
+            <button
+              type="submit"
+              className="btn mt-3 btn-success text-white hover:bg-green-500 transition-colors min-w-40"
+            >
+              Add Post
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

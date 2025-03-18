@@ -16,7 +16,7 @@ const ResultWeatherDays = ({ weatherData }) => {
   }
 
   const formatDate = (dateString) => {
-    const options = { weekday: "short", month: "short", day: "numeric" };
+    const options = { weekday: "long", month: "short", day: "numeric" };
     return new Date(dateString).toLocaleDateString("en-US", options);
   };
 
@@ -100,11 +100,20 @@ const ResultWeatherDays = ({ weatherData }) => {
       </div>
     );
   }
+  const formatDay = (dateString) => {
+    const options = { weekday: "long" };
+    return new Date(dateString).toLocaleDateString("en-US", options);
+  };
+
+  const formatMonthDay = (dateString) => {
+    const options = { month: "short", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("en-US", options);
+  };
 
   return (
     <>
       <div className="container min-w-2xl mx-auto px-4">
-        <Slider {...settings} className="w-full max-w-7xl mx-auto px-20">
+        <Slider {...settings} className="w-full max-w-7xl mx-auto px-10">
           {weatherData.days.slice(0, 14).map((day, index) => {
             const tempCelsius = ((day.temp - 32) * 5) / 9;
             return (
@@ -114,14 +123,19 @@ const ResultWeatherDays = ({ weatherData }) => {
                   onClick={() => handleDayClick(index)}
                 >
                   <div className="card-body flex flex-col items-center p-3 h-full">
-                    <h2 className="card-title text-sm md:text-xl font-bold">
-                      {formatDate(day.datetime)}
-                    </h2>
+                    <div className="text-center mb-2">
+                      <h2 className="card-title text-sm md:text-xl font-bold">
+                        {formatDay(day.datetime)}
+                      </h2>
+                      <p className="text-sm text-gray-600">
+                        {formatMonthDay(day.datetime)}
+                      </p>
+                    </div>
                     <WeatherIcons condition={day.icon} size="medium" />
                     <p className="text-3xl font-bold text-green-600">
                       {Math.round(tempCelsius)}°C
                     </p>
-                    <p className="text-xs px-4">{day.description}</p>
+                    <p className="text-xs px-4 overflow-hidden">{day.description}</p>
                   </div>
                 </div>
               </div>

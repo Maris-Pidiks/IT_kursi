@@ -17,11 +17,11 @@ function SearchWeather() {
 
   return (
     <div className="mx-auto flex justify-center min-h-screen bg-base-200">
-      <div className="text-center">
-        <div className="max-w-8xl py-9">
-          <h1 className="text-5xl font-bold mt-5 mb-10 mx-5">Search Weather</h1>
+      <div className="text-center w-full max-w-6xl px-4">
+        <div className="py-9">
+          <h1 className="text-5xl font-bold mt-5 mb-10">Search Weather</h1>
 
-          <div className="flex justify-center mb-11 max-w-3xl w-full mx-auto px-20">
+          <div className="flex flex-col sm:flex-row gap-2 justify-center mb-11 w-full max-w-xl mx-auto">
             <input
               type="text"
               value={query}
@@ -31,11 +31,11 @@ function SearchWeather() {
                   handleSearchClick();
                 }
               }}
-              className="input input-bordered w-full max-w-md focus:border-success focus:outline-success"
+              className="input input-bordered w-full focus:border-success focus:outline-success text-lg"
               placeholder="Enter city"
             />
             <button
-              className="btn btn-success text-white ml-2"
+              className="btn btn-success text-white w-full sm:w-48 text-lg"
               onClick={handleSearchClick}
             >
               Search

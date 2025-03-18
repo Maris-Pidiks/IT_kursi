@@ -4,7 +4,7 @@ import React from "react";
 
 export default function ResultSpotify({ artist, albums, topTracks }) {
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 mb-10">
       {artist && (
         <div className="bg-green-500 p-4 rounded-xl shadow px-10">
           <div className="hero bg-green-500 p-4 pt-20 rounded mb-4">
