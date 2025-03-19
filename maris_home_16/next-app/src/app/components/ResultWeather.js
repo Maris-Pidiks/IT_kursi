@@ -1,14 +1,20 @@
-// filepath: /Users/webdev/Desktop/GitRepos/IT_kursi/maris_home_16/next-app/src/app/components/ResultWeather.js
 import React from "react";
 import WeatherIcons from "./WeatherIcons";
 
 function ResultWeather({ weatherData }) {
-  if (!weatherData) {
+  // Early return if weatherData or required nested properties are missing
+  if (!weatherData?.currentConditions) {
     return null;
   }
 
-  const condition = weatherData.currentConditions.icon;
-  const tempCelsius = ((weatherData.currentConditions.temp - 32) * 5) / 9;
+  // Safely access nested properties with optional chaining
+  const condition = weatherData.currentConditions?.icon || "default";
+  const temp = weatherData.currentConditions?.temp;
+  const humidity = weatherData.currentConditions?.humidity;
+  const windspeed = weatherData.currentConditions?.windspeed;
+
+  // Calculate temperature only if temp is a number
+  const tempCelsius = typeof temp === "number" ? Math.round(((temp - 32) * 5) / 9) : null;
 
   return (
     <div className="container w-full min-w-2xl max-w-3/4 mx-auto px-4 sm:px-20">
@@ -19,20 +25,20 @@ function ResultWeather({ weatherData }) {
           </div>
           <div className="flex flex-col text-center md:text-left items-center md:items-start justify-center h-full flex-grow">
             <h2 className="card-title text-center md:text-left uppercase text-3xl mb-3">
-              {weatherData.address}
+              {weatherData.address || "Location unavailable"}
             </h2>
             <div className="flex flex-col gap-1">
               <p className="text-xl">
                 <span className="font-semibold">Temperature:</span>{" "}
-                {Math.round(tempCelsius)}°C
+                {tempCelsius !== null ? `${tempCelsius}°C` : "N/A"}
               </p>
               <p className="text-xl">
                 <span className="font-semibold">Humidity:</span>{" "}
-                {weatherData.currentConditions.humidity}%
+                {typeof humidity === "number" ? `${humidity}%` : "N/A"}
               </p>
               <p className="text-xl">
                 <span className="font-semibold">Wind Speed:</span>{" "}
-                {weatherData.currentConditions.windspeed} km/h
+                {typeof windspeed === "number" ? `${windspeed} km/h` : "N/A"}
               </p>
             </div>
           </div>
