@@ -131,7 +131,13 @@ const ResultWeatherDays = ({ weatherData }) => {
                         {formatMonthDay(day.datetime)}
                       </p>
                     </div>
-                    <WeatherIcons condition={day.icon} size="medium" />
+                    <WeatherIcons
+                      condition={day.icon}
+                      size="medium"
+                      width={80}
+                      height={80}
+                      className="my-2"
+                    />
                     <p className="text-3xl font-bold text-green-600">
                       {Math.round(tempCelsius)}°C
                     </p>

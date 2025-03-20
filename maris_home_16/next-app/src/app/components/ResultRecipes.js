@@ -11,7 +11,12 @@ function ResultRecipes({ recipes }) {
           recipes.map((recipe) => (
             <div key={recipe.idMeal} className="card bg-base-100 shadow-md">
               <figure>
-                <Image src={recipe.strMealThumb} alt={recipe.strMeal} />
+                <Image
+                  src={recipe.strMealThumb}
+                  alt={recipe.strMeal}
+                  width={200}
+                  height={200}
+                />
               </figure>
               <div className="card-body justify-center">
                 <h2 className="card-title text-center text-2xl leading-tight mx-auto">

@@ -13,6 +13,8 @@ export default function ResultSpotify({ artist, albums, topTracks }) {
               <Image
                 src={artist.images[0]?.url || "https://via.placeholder.com/100"}
                 alt={artist.name}
+                width={400}
+                height={400}
                 className="w-full max-w-md mx-auto rounded-lg border-4 border-white shadow-2xl lg:mr-10"
               />
               <div>
@@ -53,6 +55,8 @@ export default function ResultSpotify({ artist, albums, topTracks }) {
                     <Image
                       src={album.images[0]?.url || "https://via.placeholder.com/100"}
                       alt={album.name}
+                      width={200}
+                      height={200}
                       className="rounded-lg"
                     />
                     <p className="text-center mt-2">{album.name}</p>

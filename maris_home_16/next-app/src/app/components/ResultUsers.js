@@ -21,6 +21,8 @@ function ResultUsers({ users }) {
               <Image
                 src={user.avatar_url}
                 alt={user.login}
+                width={200}
+                height={200}
                 className="mt-5 mx-5 h-48 object-cover rounded-full"
               />
             </figure>
