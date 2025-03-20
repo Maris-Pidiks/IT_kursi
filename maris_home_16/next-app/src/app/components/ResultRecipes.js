@@ -26,6 +26,7 @@ function ResultRecipes({ recipes }) {
                   <a
                     href={recipe.strSource}
                     target="_blank"
+                    rel="noopener noreferrer nofollow"
                     className="btn btn-success text-white mt-2"
                   >
                     View Recipe
