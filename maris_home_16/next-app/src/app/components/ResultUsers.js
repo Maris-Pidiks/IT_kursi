@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 function ResultUsers({ users }) {
   return (
@@ -17,7 +18,7 @@ function ResultUsers({ users }) {
         {users.map((user) => (
           <div key={user.id} className="card bg-base-100 shadow-md">
             <figure>
-              <img
+              <Image
                 src={user.avatar_url}
                 alt={user.login}
                 className="mt-5 mx-5 h-48 object-cover rounded-full"

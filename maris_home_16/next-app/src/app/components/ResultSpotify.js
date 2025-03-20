@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 export default function ResultSpotify({ artist, albums, topTracks }) {
   return (
@@ -9,7 +10,7 @@ export default function ResultSpotify({ artist, albums, topTracks }) {
         <div className="bg-green-500 p-4 rounded-xl shadow px-10">
           <div className="hero bg-green-500 p-4 pt-20 rounded mb-4">
             <div className="hero-content p-0 flex-col lg:flex-row">
-              <img
+              <Image
                 src={artist.images[0]?.url || "https://via.placeholder.com/100"}
                 alt={artist.name}
                 className="w-full max-w-md mx-auto rounded-lg border-4 border-white shadow-2xl lg:mr-10"
@@ -29,7 +30,7 @@ export default function ResultSpotify({ artist, albums, topTracks }) {
                   <a
                     href={artist.external_urls.spotify}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noopener noreferrer nofollow"
                     className="text-white underline hover:text-green-200 hover:underline"
                   >
                     Spotify
@@ -46,10 +47,10 @@ export default function ResultSpotify({ artist, albums, topTracks }) {
                   <a
                     href={album.external_urls.spotify}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noopener noreferrer nofollow"
                     className="card-body"
                   >
-                    <img
+                    <Image
                       src={album.images[0]?.url || "https://via.placeholder.com/100"}
                       alt={album.name}
                       className="rounded-lg"
@@ -68,7 +69,7 @@ export default function ResultSpotify({ artist, albums, topTracks }) {
                 <a
                   href={track.external_urls.spotify}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer nofollow"
                   className="text-white underline hover:text-green-200 hover:underline"
                 >
                   {track.name}

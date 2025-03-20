@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const WeatherIcons = ({ condition, size }) => {
   const getIconUrl = (condition) => {
@@ -25,7 +26,7 @@ const WeatherIcons = ({ condition, size }) => {
   };
 
   return (
-    <img
+    <Image
       src={getIconUrl(condition)}
       alt={condition}
       style={{ width: iconSize[size], height: iconSize[size] }}
