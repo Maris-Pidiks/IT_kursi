@@ -6,7 +6,7 @@ import ResultSpotify from "./ResultSpotify";
 import Form from "./Form";
 
 const CLIENT_ID = "024078ae9f614aefbbbee63fda1049f9";
-const REDIRECT_URI = "https://vercel.com/maris-pidiks-projects/m-next-app/pages/Spotify"; // Ensure this matches the URI in Spotify Developer Dashboard
+const REDIRECT_URI = "https://m-next.vercel.app/pages/Spotify"; // Ensure this matches the URI in Spotify Developer Dashboard
 const SCOPES = "user-read-private user-read-email"; // Add the required scopes
 
 function getTokenFromUrl() {
