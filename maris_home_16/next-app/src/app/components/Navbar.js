@@ -68,6 +68,14 @@ export default function Navbar() {
             </li>
             <li>
               <Link
+                href="/pages/games"
+                className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
+              >
+                Games
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/pages/add-post"
                 className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
               >
@@ -128,6 +136,14 @@ export default function Navbar() {
               className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
             >
               Spotify
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/pages/games"
+              className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
+            >
+              Games
             </Link>
           </li>
           <li>
