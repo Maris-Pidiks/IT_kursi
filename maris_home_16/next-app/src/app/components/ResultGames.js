@@ -1,30 +1,42 @@
 import Image from "next/image";
+
 export default function ResultGames({ games }) {
-  if (!games || games.length === 0) {
-    return <div className="text-center p-4">No games found</div>;
+  if (!Array.isArray(games)) {
+    console.error("Games is not an array:", games);
+    return null;
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {games.map((game) => (
         <div key={game.steam_appid} className="card bg-base-100 shadow-xl">
-          <figure>
-            <Image
-              src={game.header_image || "/placeholder-game.jpg"}
-              alt={game.name}
-              className="w-full h-48 object-cover"
-            ></Image>
+          <figure className="relative h-48">
+            {game.header_image && (
+              <Image
+                src={game.header_image}
+                alt={game.name}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            )}
           </figure>
           <div className="card-body">
-            <h2 className="card-title">{game.name}</h2>
+            <h2 className="card-title text-lg">{game.name}</h2>
             {game.release_date && (
-              <p>Release Date: {new Date(game.release_date.date).toLocaleDateString()}</p>
+              <p className="text-sm">
+                Released: {new Date(game.release_date.date).toLocaleDateString()}
+              </p>
             )}
-            {game.price_overview && <p>Price: {game.price_overview.final_formatted}</p>}
-            <div className="card-actions justify-end">
-              <div className="flex flex-wrap gap-2">
-                {game.categories?.map((category) => (
-                  <span key={category.id} className="badge badge-outline">
+            {game.price_overview && (
+              <p className="text-success font-bold">
+                {game.price_overview.final_formatted}
+              </p>
+            )}
+            <div className="card-actions flex-col gap-2">
+              <div className="flex flex-wrap gap-1">
+                {game.categories?.slice(0, 3).map((category) => (
+                  <span key={category.id} className="badge badge-outline badge-sm">
                     {category.description}
                   </span>
                 ))}
@@ -33,7 +45,7 @@ export default function ResultGames({ games }) {
                 href={`https://store.steampowered.com/app/${game.steam_appid}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-primary"
+                className="btn btn-success btn-sm w-full"
               >
                 View on Steam
               </a>

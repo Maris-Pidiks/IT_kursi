@@ -4,6 +4,26 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "cdn.akamai.steamstatic.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "steamcdn-a.akamaihd.net",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "shared.akamai.steamstatic.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "media.steampowered.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "i.scdn.co",
         pathname: "/**",
       },
@@ -35,16 +55,6 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "avatars.githubusercontent.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "cdn.akamai.steamstatic.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "steamcdn-a.akamaihd.net",
         pathname: "/**",
       },
     ],

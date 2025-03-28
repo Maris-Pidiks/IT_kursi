@@ -11,18 +11,21 @@ export default function GetGames() {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        setLoading(true);
         const response = await fetch("/api/steam");
+        const data = await response.json();
 
         if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || "Failed to fetch games");
+          throw new Error(data.error || "Failed to fetch games");
         }
 
-        const data = await response.json();
+        if (!Array.isArray(data)) {
+          throw new Error("Invalid data format received");
+        }
+
+        console.log("Fetched games:", data); // Debug log
         setGames(data);
       } catch (err) {
-        console.error("Error fetching games:", err);
+        console.error("Error:", err);
         setError(err.message);
       } finally {
         setLoading(false);
@@ -34,17 +37,27 @@ export default function GetGames() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-[200px]">
-        <div className="loading loading-spinner loading-lg"></div>
+      <div className="flex justify-center items-center min-h-[400px]">
+        <span className="loading loading-spinner loading-lg"></span>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="text-center text-red-500 p-4">
-        <p>Error: {error}</p>
-        <p className="text-sm mt-2">Please try again later</p>
+      <div className="text-center text-error p-4">
+        <p className="text-xl">Error: {error}</p>
+        <button className="btn btn-primary mt-4" onClick={() => window.location.reload()}>
+          Try Again
+        </button>
+      </div>
+    );
+  }
+
+  if (!games || games.length === 0) {
+    return (
+      <div className="text-center p-4">
+        <p className="text-xl">No games found</p>
       </div>
     );
   }
