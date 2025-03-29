@@ -3,16 +3,14 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.connectToDatabase = connectToDatabase;
+exports["default"] = void 0;
 
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var MONGODB_URI = process.env.MONGODB_URI;
-
-if (!MONGODB_URI) {
-  throw new Error("Please define the MONGODB_URI environment variable inside .env");
+if (!process.env.MONGODB_URI) {
+  throw new Error("Please define the MONGODB_URI environment variable");
 }
 
 var cached = global.mongoose;
@@ -40,10 +38,14 @@ function connectToDatabase() {
         case 2:
           if (!cached.promise) {
             opts = {
-              bufferCommands: false
+              bufferCommands: false,
+              maxPoolSize: 10
             };
-            cached.promise = _mongoose["default"].connect(MONGODB_URI, opts).then(function (mongoose) {
+            cached.promise = _mongoose["default"].connect(process.env.MONGODB_URI, opts).then(function (mongoose) {
               return mongoose;
+            })["catch"](function (error) {
+              console.error("MongoDB connection error:", error);
+              throw error;
             });
           }
 
@@ -53,22 +55,21 @@ function connectToDatabase() {
 
         case 6:
           cached.conn = _context.sent;
-          _context.next = 13;
-          break;
+          return _context.abrupt("return", cached.conn);
 
-        case 9:
-          _context.prev = 9;
+        case 10:
+          _context.prev = 10;
           _context.t0 = _context["catch"](3);
           cached.promise = null;
           throw _context.t0;
-
-        case 13:
-          return _context.abrupt("return", cached.conn);
 
         case 14:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[3, 9]]);
+  }, null, null, [[3, 10]]);
 }
+
+var _default = connectToDatabase;
+exports["default"] = _default;
