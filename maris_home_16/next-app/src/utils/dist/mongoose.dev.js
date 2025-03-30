@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
+exports.connectToDatabase = connectToDatabase;
 
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
@@ -70,6 +70,3 @@ function connectToDatabase() {
     }
   }, null, null, [[3, 10]]);
 }
-
-var _default = connectToDatabase;
-exports["default"] = _default;
