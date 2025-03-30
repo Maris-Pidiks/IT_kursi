@@ -43,6 +43,8 @@ export default async function BlogPage() {
               <Link
                 href={`/blog/${post._id}`}
                 key={post._id}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-200"
               >
                 <div className="card-body">

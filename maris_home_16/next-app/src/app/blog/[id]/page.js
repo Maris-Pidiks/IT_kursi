@@ -3,27 +3,27 @@ import Image from "next/image";
 
 async function getPost(id) {
   try {
-    // Use absolute URL for API calls
-    const response = await fetch(
-      `${process.env.VERCEL_URL || "http://localhost:3000"}/api/posts/${id}`,
-      {
-        cache: "no-store",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`/api/posts/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    });
 
     if (!response.ok) {
       throw new Error(`Failed to fetch post: ${response.statusText}`);
     }
 
-    return response.json();
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.error("Error fetching post:", error);
     return null;
   }
 }
+
+console.log("Fetching post with ID:", id); // Debug log
 
 export default async function BlogPost({ params }) {
   const post = await getPost(params.id);
@@ -33,7 +33,7 @@ export default async function BlogPost({ params }) {
       <div className="container mx-auto p-4 text-center min-h-screen bg-base-200">
         <div className="max-w-md mx-auto card bg-base-100 shadow-xl p-6">
           <h1 className="text-3xl font-bold mb-4">Post not found</h1>
-          <Link href="/blog" className="btn btn-primary">
+          <Link href="/blog" className="btn btn-success text-white" target="_self">
             Back to Blog
           </Link>
         </div>
@@ -53,6 +53,7 @@ export default async function BlogPost({ params }) {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority
               />
             </figure>
           )}
@@ -63,7 +64,7 @@ export default async function BlogPost({ params }) {
               <span className="text-sm text-gray-500">
                 {new Date(post.createdAt).toLocaleDateString()}
               </span>
-              <Link href="/blog" className="btn btn-success text-white">
+              <Link href="/blog" className="btn btn-success text-white" target="_self">
                 Back to Blog
               </Link>
             </div>

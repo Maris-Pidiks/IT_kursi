@@ -12,6 +12,7 @@ export default function AddPost() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(""); // Add this line
 
   const onChangeHandler = (e) =>
     setFormData({ ...formdata, [e.target.name]: e.target.value });
@@ -20,6 +21,7 @@ export default function AddPost() {
     e.preventDefault();
     setIsLoading(true);
     setError("");
+    setSuccess(""); // Reset success message
 
     try {
       const res = await fetch("/api/posts", {
@@ -43,9 +45,14 @@ export default function AddPost() {
         img: "",
       });
 
-      // Navigate to blog page and refresh the data
-      router.push("/blog");
-      router.refresh();
+      // Show success message
+      setSuccess("Post successfully added!");
+
+      // Navigate to blog page after a short delay
+      setTimeout(() => {
+        router.push("/blog");
+        router.refresh();
+      }, 2000);
     } catch (error) {
       console.error("Error creating post:", error);
       setError(error.message);
@@ -62,6 +69,12 @@ export default function AddPost() {
         {error && (
           <div className="alert alert-error mb-4">
             <span>{error}</span>
+          </div>
+        )}
+
+        {success && (
+          <div className="alert alert-success mb-4">
+            <span>{success}</span>
           </div>
         )}
 

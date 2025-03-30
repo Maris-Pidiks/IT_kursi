@@ -4,12 +4,11 @@ export async function GET(request, { params }) {
   try {
     const { id } = params;
 
-    // Mock data - replace with your database query
+    // Mock data for testing
     const post = {
       _id: id,
       title: "Sample Blog Post",
-      description:
-        "This is a detailed blog post description. Replace this with actual content from your database.",
+      description: "This is a sample blog post description.",
       img: "https://via.placeholder.com/800x400",
       createdAt: new Date().toISOString(),
     };
