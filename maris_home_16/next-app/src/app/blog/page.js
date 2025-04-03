@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import LoadingState from "@/app/components/LoadingState";
 
 async function getData() {
   try {
@@ -9,6 +10,7 @@ async function getData() {
         "Content-Type": "application/json",
       },
       cache: "no-store",
+      next: { revalidate: 0 },
     });
 
     if (!response.ok) {
@@ -16,6 +18,7 @@ async function getData() {
     }
 
     const data = await response.json();
+    console.log("Fetched posts:", data); // Debug log
     return Array.isArray(data) ? data : [];
   } catch (error) {
     console.error("Error fetching posts:", error);
@@ -25,11 +28,14 @@ async function getData() {
 
 export default async function BlogPage() {
   const posts = await getData();
+  console.log("Posts in component:", posts);
 
   const truncateText = (text, limit) => {
     if (text.length <= limit) return text;
     return text.slice(0, limit) + "...";
   };
+
+  <LoadingState />;
 
   return (
     <div className="container w-full max-w-full mx-auto p-4 flex justify-center min-h-screen bg-base-200 px-5 md:px-20">

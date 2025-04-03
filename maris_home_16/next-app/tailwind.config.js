@@ -5,13 +5,6 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  theme: {
-    extend: {
-      backgroundImage: {
-        "hero-bg": "url('/assets/bg.jpeg')",
-      },
-    },
-  },
   plugins: [require("daisyui")],
   daisyui: {
     themes: ["light", "dark"], // Add the themes you want to use
