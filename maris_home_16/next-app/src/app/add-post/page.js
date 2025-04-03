@@ -3,6 +3,15 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+// Helper function to generate slug
+const generateSlug = (title) => {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-");
+};
+
 export default function AddPost() {
   const router = useRouter();
   const [formdata, setFormData] = useState({
@@ -14,8 +23,9 @@ export default function AddPost() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const onChangeHandler = (e) =>
+  const onChangeHandler = (e) => {
     setFormData({ ...formdata, [e.target.name]: e.target.value });
+  };
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -24,12 +34,20 @@ export default function AddPost() {
     setSuccess("");
 
     try {
+      const baseSlug = generateSlug(formdata.title);
+
+      const postData = {
+        ...formdata,
+        slug: baseSlug,
+        img: formdata.img || "https://via.placeholder.com/800x400",
+      };
+
       const res = await fetch("/api/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formdata),
+        body: JSON.stringify(postData),
       });
 
       const data = await res.json();
@@ -38,24 +56,21 @@ export default function AddPost() {
         throw new Error(data.error || "Failed to create post");
       }
 
-      // Reset form
       setFormData({
         title: "",
         description: "",
         img: "",
       });
 
-      // Show success message
       setSuccess("Post successfully added!");
 
-      // Navigate to blog page after delay
       setTimeout(() => {
         router.push("/blog");
         router.refresh();
       }, 2000);
     } catch (error) {
       console.error("Error creating post:", error);
-      setError(error.message);
+      setError(error.message || "Failed to create post");
     } finally {
       setIsLoading(false);
     }
@@ -81,7 +96,7 @@ export default function AddPost() {
         <form onSubmit={onSubmitHandler} className="bg-white p-6 rounded-lg shadow-xl">
           <div className="form-control mb-4">
             <label className="label">
-              <span className="label-text">Post Title</span>
+              <span className="label-text">Title</span>
             </label>
             <input
               type="text"
@@ -99,10 +114,11 @@ export default function AddPost() {
             <label className="label">
               <span className="label-text">Description</span>
             </label>
-            <textarea
+            <input
+              type="text"
               name="description"
-              placeholder="Description"
-              className="textarea textarea-bordered w-full h-32"
+              placeholder="Post description"
+              className="input input-bordered w-full"
               onChange={onChangeHandler}
               value={formdata.description}
               required
@@ -112,7 +128,7 @@ export default function AddPost() {
 
           <div className="form-control mb-4">
             <label className="label">
-              <span className="label-text">Image URL</span>
+              <span className="label-text">Image URL (optional)</span>
             </label>
             <input
               type="url"
@@ -121,25 +137,22 @@ export default function AddPost() {
               className="input input-bordered w-full"
               onChange={onChangeHandler}
               value={formdata.img}
-              required
               disabled={isLoading}
             />
+            <label className="label">
+              <span className="label-text-alt text-gray-500">
+                Leave empty to use default image
+              </span>
+            </label>
           </div>
 
-          <div className="form-control">
+          <div className="flex justify-end mt-6">
             <button
               type="submit"
-              className="btn mt-3 btn-success text-white hover:bg-green-500 transition-colors min-w-40"
+              className={`btn btn-success text-white ${isLoading ? "loading" : ""}`}
               disabled={isLoading}
             >
-              {isLoading ? (
-                <>
-                  <span className="loading loading-spinner"></span>
-                  Adding...
-                </>
-              ) : (
-                "Add Post"
-              )}
+              {isLoading ? "Adding Post..." : "Add Post"}
             </button>
           </div>
         </form>

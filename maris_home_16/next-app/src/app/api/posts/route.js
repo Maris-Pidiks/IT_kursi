@@ -2,22 +2,6 @@ import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/utils/mongoose";
 import Post from "@/models/Post";
 
-export async function GET(request) {
-  try {
-    await connectToDatabase();
-    const posts = await Post.find({}).sort({ createdAt: -1 });
-
-    if (!posts) {
-      return NextResponse.json({ error: "No posts found" }, { status: 404 });
-    }
-
-    return NextResponse.json(posts, { status: 200 });
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return NextResponse.json({ error: "Error fetching data" }, { status: 500 });
-  }
-}
-
 export async function POST(request) {
   try {
     await connectToDatabase();
@@ -31,17 +15,14 @@ export async function POST(request) {
       );
     }
 
-    const newPost = new Post({
-      title: body.title,
-      description: body.description,
-      img: body.img || "",
-    });
+    const post = await Post.create(body);
 
-    await newPost.save();
-
-    return NextResponse.json(newPost, { status: 201 });
+    return NextResponse.json(post, { status: 201 });
   } catch (error) {
     console.error("Error creating post:", error);
-    return NextResponse.json({ error: "Error creating post" }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message || "Failed to create post" },
+      { status: 500 }
+    );
   }
 }

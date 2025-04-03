@@ -3,27 +3,19 @@ import Link from "next/link";
 
 async function getData() {
   try {
-    const baseUrl =
-      process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_API_URL : "";
-
-    console.log("Fetching from:", `${baseUrl}/api/posts`); // Debug log
-
-    const response = await fetch(`${baseUrl}/api/posts`, {
+    const response = await fetch("http://localhost:3000/api/posts", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      cache: "no-store", // Replace revalidate with no-store
+      cache: "no-store",
     });
 
-    const data = await response.json();
-    console.log("Response data:", data); // Debug log
-
     if (!response.ok) {
-      console.error("Response not OK:", response.status);
-      return [];
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
+    const data = await response.json();
     return Array.isArray(data) ? data : [];
   } catch (error) {
     console.error("Error fetching posts:", error);
@@ -33,6 +25,12 @@ async function getData() {
 
 export default async function BlogPage() {
   const posts = await getData();
+
+  const truncateText = (text, limit) => {
+    if (text.length <= limit) return text;
+    return text.slice(0, limit) + "...";
+  };
+
   return (
     <div className="container w-full max-w-full mx-auto p-4 flex justify-center min-h-screen bg-base-200 px-5 md:px-20">
       <div className="container max-w-3xl mx-auto p-4">
@@ -40,18 +38,25 @@ export default async function BlogPage() {
         <div className="grid gap-4">
           {posts.length > 0 ? (
             posts.map((post) => (
-              <Link
-                href={`/blog/${post._id}`}
+              <div
                 key={post._id}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-200"
               >
                 <div className="card-body">
-                  <h2 className="card-title">{post.title}</h2>
-                  <p>{post.description}</p>
+                  <h2 className="card-title">{truncateText(post.title, 30)}</h2>
+                  <p>{truncateText(post.description, 150)}</p>
+                  <div className="card-actions justify-end mt-4">
+                    <Link
+                      href={`/blog/${post._id}`}
+                      className="btn btn-success btn-sm text-white"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Read more
+                    </Link>
+                  </div>
                 </div>
-              </Link>
+              </div>
             ))
           ) : (
             <div className="text-center">
