@@ -4,31 +4,53 @@ import { useState, useEffect } from "react";
 
 export default function Comments({ postId }) {
   const [comments, setComments] = useState([]);
-  const [commentCount, setCommentCount] = useState(0);
   const [newComment, setNewComment] = useState({ name: "", comment: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Add loading state for initial fetch
+  const [isFetching, setIsFetching] = useState(true);
+
   useEffect(() => {
+    const fetchComments = async () => {
+      if (!postId) return;
+
+      setIsFetching(true);
+      try {
+        const res = await fetch(`/api/comments?postId=${postId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to fetch comments");
+        }
+
+        const data = await res.json();
+        setComments(data);
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+        setError("Failed to load comments");
+      } finally {
+        setIsFetching(false);
+      }
+    };
+
     fetchComments();
   }, [postId]);
-
-  const fetchComments = async () => {
-    try {
-      const res = await fetch(`/api/comments?postId=${postId}`);
-      if (!res.ok) throw new Error("Failed to fetch comments");
-      const data = await res.json();
-      setComments(data);
-      setCommentCount(data.length);
-    } catch (error) {
-      console.error("Error fetching comments:", error);
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
+
+    if (!postId) {
+      setError("Invalid post ID");
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const res = await fetch("/api/comments", {
@@ -49,14 +71,17 @@ export default function Comments({ postId }) {
         throw new Error(data.error || "Failed to post comment");
       }
 
-      // Update comments and count
+      // Update comments list with new comment
       setComments((prevComments) => [data, ...prevComments]);
-      setCommentCount((prevCount) => prevCount + 1);
 
       // Reset form
       setNewComment({ name: "", comment: "" });
+
+      // Dispatch event for comment count update
+      window.dispatchEvent(new Event("commentAdded"));
     } catch (error) {
       setError(error.message);
+      console.error("Error posting comment:", error);
     } finally {
       setIsLoading(false);
     }
@@ -111,17 +136,31 @@ export default function Comments({ postId }) {
         </div>
       </form>
 
-      <div className="space-y-4">
-        {comments.map((comment) => (
-          <div key={comment._id} className="border-b pb-4">
-            <p className="font-semibold">{comment.name}</p>
-            <p className="text-gray-500 text-sm">
-              {new Date(comment.createdAt).toLocaleDateString()}
-            </p>
-            <p className="mt-2">{comment.comment}</p>
-          </div>
-        ))}
-      </div>
+      {isFetching ? (
+        <div className="flex justify-center py-4">
+          <span className="loading loading-spinner loading-md"></span>
+        </div>
+      ) : error ? (
+        <div className="alert alert-error">
+          <span>{error}</span>
+        </div>
+      ) : comments.length === 0 ? (
+        <p className="text-gray-600 text-center">
+          No comments yet. Be the first to comment!
+        </p>
+      ) : (
+        <div className="space-y-4">
+          {comments.map((comment) => (
+            <div key={comment._id} className="border-b pb-4">
+              <p className="font-semibold">{comment.name}</p>
+              <p className="text-gray-500 text-sm">
+                {new Date(comment.createdAt).toLocaleDateString()}
+              </p>
+              <p className="mt-2">{comment.comment}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

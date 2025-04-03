@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Comments from "@/app/components/Comments";
 import FormattedDate from "@/app/components/FormattedDate";
+import CommentCount from "@/app/components/CommentCount";
 
 const defaultImage = "https://via.placeholder.com/800x400";
 
@@ -68,7 +69,7 @@ export default async function PostPage({ params }) {
           <div className="p-6">
             <div className="flex justify-between items-center mb-4">
               <FormattedDate date={post.createdAt} />
-              <span className="text-gray-600">Comments ({post.commentCount || 0})</span>
+              <CommentCount postId={post.id} initialCount={post.commentCount} />
             </div>
 
             <h1 className="text-4xl font-bold mb-4 break-words">{post.title}</h1>
