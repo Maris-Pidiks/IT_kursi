@@ -4,62 +4,40 @@ import { useState, useEffect } from "react";
 
 export default function Comments({ postId }) {
   const [comments, setComments] = useState([]);
+  const [commentCount, setCommentCount] = useState(0);
   const [newComment, setNewComment] = useState({ name: "", comment: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Add useEffect to fetch existing comments
   useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const res = await fetch(`/api/comments?postId=${postId}`);
-        if (!res.ok) throw new Error("Failed to fetch comments");
-        const data = await res.json();
-        setComments(data);
-      } catch (error) {
-        console.error("Error fetching comments:", error);
-      }
-    };
-
-    if (postId) {
-      fetchComments();
-    }
+    fetchComments();
   }, [postId]);
+
+  const fetchComments = async () => {
+    try {
+      const res = await fetch(`/api/comments?postId=${postId}`);
+      if (!res.ok) throw new Error("Failed to fetch comments");
+      const data = await res.json();
+      setComments(data);
+      setCommentCount(data.length);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
 
-    // Validate all required fields including postId
-    if (!postId) {
-      setError("Post ID is missing");
-      setIsLoading(false);
-      return;
-    }
-
-    if (!newComment.name.trim()) {
-      setError("Name is required");
-      setIsLoading(false);
-      return;
-    }
-
-    if (!newComment.comment.trim()) {
-      setError("Comment is required");
-      setIsLoading(false);
-      return;
-    }
-
     try {
-      console.log("Submitting comment with postId:", postId); // Debug log
-
       const res = await fetch("/api/comments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          postId: postId, // Ensure postId is included
+          postId,
           name: newComment.name.trim(),
           comment: newComment.comment.trim(),
         }),
@@ -71,13 +49,13 @@ export default function Comments({ postId }) {
         throw new Error(data.error || "Failed to post comment");
       }
 
-      // Update comments list with new comment
+      // Update comments and count
       setComments((prevComments) => [data, ...prevComments]);
+      setCommentCount((prevCount) => prevCount + 1);
 
       // Reset form
       setNewComment({ name: "", comment: "" });
     } catch (error) {
-      console.error("Error posting comment:", error);
       setError(error.message);
     } finally {
       setIsLoading(false);
@@ -137,7 +115,7 @@ export default function Comments({ postId }) {
         {comments.map((comment) => (
           <div key={comment._id} className="border-b pb-4">
             <p className="font-semibold">{comment.name}</p>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-500 text-sm">
               {new Date(comment.createdAt).toLocaleDateString()}
             </p>
             <p className="mt-2">{comment.comment}</p>
