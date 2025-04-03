@@ -1,6 +1,6 @@
 "use client";
 
-import GetGames from "../../components/GetGames";
+import GetGames from "../components/GetGames";
 
 export default function GamesPage() {
   return (

@@ -27,7 +27,9 @@ export default function RootLayout({ children }) {
         <div className="min-h-screen bg-base-200 flex flex-col">
           <div>
             <Navbar />
-            <div className="max-w-6xl mx-auto flex-col flex-grow">{children}</div>
+            <div className="max-w-7xl mx-auto bg-cyan-400 flex-col flex-grow">
+              {children}
+            </div>
             <Footer />
             <BackToTop />
           </div>

@@ -12,7 +12,7 @@ export default function AddPost() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState(""); // Add this line
+  const [success, setSuccess] = useState("");
 
   const onChangeHandler = (e) =>
     setFormData({ ...formdata, [e.target.name]: e.target.value });
@@ -21,7 +21,7 @@ export default function AddPost() {
     e.preventDefault();
     setIsLoading(true);
     setError("");
-    setSuccess(""); // Reset success message
+    setSuccess("");
 
     try {
       const res = await fetch("/api/posts", {
@@ -48,7 +48,7 @@ export default function AddPost() {
       // Show success message
       setSuccess("Post successfully added!");
 
-      // Navigate to blog page after a short delay
+      // Navigate to blog page after delay
       setTimeout(() => {
         router.push("/blog");
         router.refresh();

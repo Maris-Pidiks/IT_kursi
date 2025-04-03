@@ -1,4 +1,4 @@
-import SearchRecipesOld from "../../components/SearchRecipesOld";
+import SearchRecipesOld from "../components/SearchRecipesOld";
 
 export default function Recipes() {
   return (

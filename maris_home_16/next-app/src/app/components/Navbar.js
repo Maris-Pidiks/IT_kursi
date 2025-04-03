@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import Menu from "../config/menus";
 
 export default function Navbar() {
   return (
@@ -22,147 +23,14 @@ export default function Navbar() {
               />
             </svg>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-          >
-            <li>
-              <Link
-                href="/"
-                className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2 my-1"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/pages/Githubusers"
-                className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2 my-1"
-              >
-                GithubUsers
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/pages/Recipes"
-                className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2 my-1"
-              >
-                Recipes
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/pages/Weather"
-                className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
-              >
-                Weather
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/pages/Spotify"
-                className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
-              >
-                Spotify
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/pages/games"
-                className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
-              >
-                Games
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/pages/add-post"
-                className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
-              >
-                Add Post
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/blog"
-                className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
-              >
-                Blog
-              </Link>
-            </li>
-          </ul>
+          <Menu className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow" />
         </div>
         <Link href="/">
           <Image src="/assets/next.svg" alt="Logo" width={120} height={200} />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 mr-5">
-          <li>
-            <Link
-              href="/"
-              className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/pages/Githubusers"
-              className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
-            >
-              GithubUsers
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/pages/Recipes"
-              className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
-            >
-              Recipes
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/pages/Weather"
-              className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
-            >
-              Weather
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/pages/Spotify"
-              className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
-            >
-              Spotify
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/pages/games"
-              className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
-            >
-              Games
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/pages/add-post"
-              className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
-            >
-              Add Post
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/blog"
-              className="text-base hover:text-white active:text-white hover:bg-success active:bg-success mx-2"
-            >
-              Blog
-            </Link>
-          </li>
-        </ul>
+        <Menu className="menu menu-horizontal px-1 mr-5" />
       </div>
     </div>
   );
