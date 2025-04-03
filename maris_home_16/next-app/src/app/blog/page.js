@@ -35,15 +35,15 @@ export default async function BlogPage() {
     return text.slice(0, limit) + "...";
   };
 
-  <LoadingState />;
-
   return (
     <div className="container w-full max-w-full mx-auto p-4 flex justify-center min-h-screen bg-base-200 px-5 md:px-20">
       <div className="container max-w-3xl mx-auto p-4">
         <h1 className="text-5xl font-bold my-10">Blog Posts</h1>
-        <div className="grid gap-4">
-          {posts.length > 0 ? (
-            posts.map((post) => (
+        {posts.length === 0 ? (
+          <LoadingState />
+        ) : (
+          <div className="grid gap-4">
+            {posts.map((post) => (
               <div
                 key={post._id}
                 className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-200"
@@ -53,26 +53,17 @@ export default async function BlogPage() {
                   <p>{truncateText(post.description, 150)}</p>
                   <div className="card-actions justify-end mt-4">
                     <Link
-                      href={`/blog/${post._id}`}
+                      href={`/blog/${post.slug}`}
                       className="btn btn-success btn-sm text-white"
-                      target="_blank"
-                      rel="noopener noreferrer"
                     >
                       Read more
                     </Link>
                   </div>
                 </div>
               </div>
-            ))
-          ) : (
-            <div className="text-center">
-              <p className="text-lg mb-4">No posts available</p>
-              <Link href="/pages/add-post" className="btn btn-success text-white">
-                Add Your First Post
-              </Link>
-            </div>
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

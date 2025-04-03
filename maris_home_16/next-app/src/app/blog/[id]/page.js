@@ -1,9 +1,10 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
-async function getPost(id) {
+async function getPost(slug) {
   try {
-    const response = await fetch(`/api/posts/${id}`, {
+    const response = await fetch(`http://localhost:3000/api/posts/${slug}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -12,6 +13,9 @@ async function getPost(id) {
     });
 
     if (!response.ok) {
+      if (response.status === 404) {
+        return notFound();
+      }
       throw new Error(`Failed to fetch post: ${response.statusText}`);
     }
 
@@ -19,57 +23,50 @@ async function getPost(id) {
     return data;
   } catch (error) {
     console.error("Error fetching post:", error);
-    return null;
+    throw error;
   }
 }
 
-console.log("Fetching post with ID:", id); // Debug log
-
-export default async function BlogPost({ params }) {
+export default async function PostPage({ params }) {
   const post = await getPost(params.id);
-
-  if (!post) {
-    return (
-      <div className="container mx-auto p-4 text-center min-h-screen bg-base-200">
-        <div className="max-w-md mx-auto card bg-base-100 shadow-xl p-6">
-          <h1 className="text-3xl font-bold mb-4">Post not found</h1>
-          <Link href="/blog" className="btn btn-success text-white" target="_self">
-            Back to Blog
-          </Link>
-        </div>
-      </div>
-    );
-  }
+  const defaultImage = "https://via.placeholder.com/800x400";
 
   return (
-    <div className="container mx-auto p-4 min-h-screen bg-base-200">
-      <div className="max-w-3xl mx-auto">
-        <div className="card bg-base-100 shadow-xl">
-          {post.img && (
-            <figure className="relative w-full h-64">
-              <Image
-                src={post.img}
-                alt={post.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                priority
-              />
-            </figure>
-          )}
-          <div className="card-body">
-            <h1 className="card-title text-3xl">{post.title}</h1>
-            <p className="py-4">{post.description}</p>
-            <div className="card-actions justify-between items-center">
-              <span className="text-sm text-gray-500">
-                {new Date(post.createdAt).toLocaleDateString()}
-              </span>
-              <Link href="/blog" className="btn btn-success text-white" target="_self">
-                Back to Blog
+    <div className="container w-full max-w-full mx-auto p-4 flex justify-center min-h-screen bg-base-200 px-5 md:px-20">
+      <div className="container max-w-3xl mx-auto p-4">
+        <article className="bg-white rounded-lg shadow-xl overflow-hidden">
+          <div className="p-6">
+            <p className="text-gray-600 mb-4">
+              {new Date(post.createdAt).toLocaleDateString()}
+            </p>
+            <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+            {post.img && post.img !== defaultImage && (
+              <div className="relative w-full h-64 my-8">
+                <Image
+                  src={post.img}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority
+                />
+              </div>
+            )}
+
+            <div className="prose max-w-none mb-6">
+              <p>{post.description}</p>
+            </div>
+
+            <div className="flex justify-end items-center mt-8">
+              <Link
+                href="/blog"
+                className="flex flex-row justify-end btn btn-success text-white"
+              >
+                ← Back to Blog
               </Link>
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   );
