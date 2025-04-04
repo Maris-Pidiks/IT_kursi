@@ -10,7 +10,7 @@ var _server = require("next/server");
 
 var _mongoose = require("@/utils/mongoose");
 
-var _Post = _interopRequireDefault(require("@/app/utils src/models/Post"));
+var _Post = _interopRequireDefault(require("@/app/utils/models/Post"));
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
