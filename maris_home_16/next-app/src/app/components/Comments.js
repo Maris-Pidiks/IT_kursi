@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { TrashIcon } from "@heroicons/react/24/outline";
+import FormattedDate from "./FormattedDate";
 
 export default function Comments({ postId }) {
   const [comments, setComments] = useState([]);
@@ -87,6 +89,40 @@ export default function Comments({ postId }) {
     }
   };
 
+  const handleDelete = async (commentId) => {
+    if (!confirm("Are you sure you want to delete this comment?")) {
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/comments/${commentId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+
+      // First try to parse the response as JSON
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok) {
+        throw new Error(data?.error || "Failed to delete comment");
+      }
+
+      // Update local state
+      setComments((prevComments) =>
+        prevComments.filter((comment) => comment._id !== commentId)
+      );
+
+      // Notify other components
+      window.dispatchEvent(new Event("commentChanged"));
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+      setError(error.message || "Failed to delete comment");
+    }
+  };
+
   return (
     <div className="mt-8 bg-white rounded-lg shadow-xl p-6">
       <h2 className="text-2xl font-bold mb-6">Comments</h2>
@@ -152,11 +188,20 @@ export default function Comments({ postId }) {
         <div className="space-y-4">
           {comments.map((comment) => (
             <div key={comment._id} className="border-b pb-4">
-              <p className="font-semibold">{comment.name}</p>
-              <p className="text-gray-500 text-sm">
-                {new Date(comment.createdAt).toLocaleDateString()}
-              </p>
-              <p className="mt-2">{comment.comment}</p>
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="font-semibold">{comment.name}</p>
+                  <FormattedDate date={comment.createdAt} />
+                  <p className="mt-2">{comment.comment}</p>
+                </div>
+                <button
+                  onClick={() => handleDelete(comment._id)}
+                  className="text-gray-500 hover:text-red-500 transition-colors p-1"
+                  title="Delete comment"
+                >
+                  <TrashIcon className="h-5 w-5" />
+                </button>
+              </div>
             </div>
           ))}
         </div>

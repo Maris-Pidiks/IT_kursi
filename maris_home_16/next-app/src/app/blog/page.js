@@ -4,6 +4,7 @@ import LoadingState from "@/app/components/LoadingState";
 
 async function getData() {
   try {
+    // Fetch posts
     const response = await fetch("http://localhost:3000/api/posts", {
       method: "GET",
       headers: {
@@ -17,9 +18,36 @@ async function getData() {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json();
-    console.log("Fetched posts:", data); // Debug log
-    return Array.isArray(data) ? data : [];
+    const posts = await response.json();
+
+    // Fetch comment counts for each post
+    const postsWithComments = await Promise.all(
+      posts.map(async (post) => {
+        const commentsResponse = await fetch(
+          `http://localhost:3000/api/comments?postId=${post.id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            cache: "no-store",
+          }
+        );
+
+        let commentCount = 0;
+        if (commentsResponse.ok) {
+          const comments = await commentsResponse.json();
+          commentCount = Array.isArray(comments) ? comments.length : 0;
+        }
+
+        return {
+          ...post,
+          commentCount,
+        };
+      })
+    );
+
+    return Array.isArray(postsWithComments) ? postsWithComments : [];
   } catch (error) {
     console.error("Error fetching posts:", error);
     return [];
@@ -28,7 +56,6 @@ async function getData() {
 
 export default async function BlogPage() {
   const posts = await getData();
-  console.log("Posts in component:", posts);
 
   const truncateText = (text, limit) => {
     if (text.length <= limit) return text;
@@ -49,9 +76,14 @@ export default async function BlogPage() {
                 className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-200"
               >
                 <div className="card-body">
-                  <h2 className="card-title">{post.title}</h2>
+                  <div className="flex justify-between items-start mb-2">
+                    <h2 className="card-title text-2xl">{post.title}</h2>
+                  </div>
                   <p>{truncateText(post.description, 150)}</p>
-                  <div className="card-actions justify-end mt-4">
+                  <div className="card-actions justify-between mt-4">
+                    <span className="text-gray-600 text-sm mt-1">
+                      Comments ({post.commentCount || 0})
+                    </span>
                     <Link
                       href={`/blog/${post.slug}`}
                       className="btn btn-success btn-sm text-white"

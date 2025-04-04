@@ -8,8 +8,8 @@ export default function FormattedDate({ date }) {
   });
 
   return (
-    <time dateTime={date} className="text-gray-600">
-      {formattedDate}
+    <time dateTime={date} className="text-gray-500 text-sm">
+      {new Date(date).toLocaleDateString()}
     </time>
   );
 }
