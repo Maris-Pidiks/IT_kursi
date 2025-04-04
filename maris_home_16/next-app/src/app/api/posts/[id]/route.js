@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/utils/mongoose";
-import Post from "@/app/utils/models/Post";
+import Post from "@/utils/models/Post";
 import mongoose from "mongoose";
 
 export async function GET(request, { params }) {
