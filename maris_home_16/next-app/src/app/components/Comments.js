@@ -199,7 +199,7 @@ export default function Comments({ postId }) {
                   className="text-gray-500 hover:text-red-500 transition-colors p-1"
                   title="Delete comment"
                 >
-                  <TrashIcon className="h-5 w-5" />
+                  <TrashIcon className="h-6 w-6" />
                 </button>
               </div>
             </div>

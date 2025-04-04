@@ -6,22 +6,25 @@ export default function CommentCount({ postId, initialCount = 0 }) {
   const [count, setCount] = useState(initialCount);
 
   useEffect(() => {
-    const handleCommentChange = async () => {
+    const fetchCount = async () => {
       try {
         const res = await fetch(`/api/comments?postId=${postId}`);
         if (res.ok) {
           const comments = await res.json();
-          setCount(comments.length);
+          setCount(Array.isArray(comments) ? comments.length : 0);
         }
       } catch (error) {
-        console.error("Error updating comment count:", error);
+        console.error("Error fetching comment count:", error);
       }
     };
 
-    // Listen for comment changes
+    fetchCount();
+
+    // Listen for comment updates
+    const handleCommentChange = () => fetchCount();
     window.addEventListener("commentChanged", handleCommentChange);
     return () => window.removeEventListener("commentChanged", handleCommentChange);
   }, [postId]);
 
-  return <span className="text-gray-600">Comments ({count})</span>;
+  return <span className="text-gray-600 text-sm">Comments ({count})</span>;
 }

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import LoadingState from "@/app/components/LoadingState";
+import CommentCount from "@/app/components/CommentCount";
 
 async function getData() {
   try {
@@ -11,7 +12,6 @@ async function getData() {
         "Content-Type": "application/json",
       },
       cache: "no-store",
-      next: { revalidate: 0 },
     });
 
     if (!response.ok) {
@@ -24,7 +24,7 @@ async function getData() {
     const postsWithComments = await Promise.all(
       posts.map(async (post) => {
         const commentsResponse = await fetch(
-          `http://localhost:3000/api/comments?postId=${post.id}`,
+          `http://localhost:3000/api/comments?postId=${post._id}`, // Use _id instead of id
           {
             method: "GET",
             headers: {
@@ -47,7 +47,7 @@ async function getData() {
       })
     );
 
-    return Array.isArray(postsWithComments) ? postsWithComments : [];
+    return postsWithComments;
   } catch (error) {
     console.error("Error fetching posts:", error);
     return [];
@@ -81,9 +81,10 @@ export default async function BlogPage() {
                   </div>
                   <p>{truncateText(post.description, 150)}</p>
                   <div className="card-actions justify-between mt-4">
-                    <span className="text-gray-600 text-sm mt-1">
-                      Comments ({post.commentCount || 0})
-                    </span>
+                    <CommentCount
+                      postId={post._id}
+                      initialCount={post.commentCount || 0}
+                    />
                     <Link
                       href={`/blog/${post.slug}`}
                       className="btn btn-success btn-sm text-white"
