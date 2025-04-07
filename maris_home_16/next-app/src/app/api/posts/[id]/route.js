@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "@/utils/mongoose";
+import { connectToDatabase } from "@/lib/db";
 import Post from "@/models/Post";
 import mongoose from "mongoose";
 
