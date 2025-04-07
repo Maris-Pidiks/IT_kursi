@@ -48,11 +48,11 @@ export default function AddPost() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(postData),
+        cache: "no-store",
       });
 
-      const data = await res.json();
-
       if (!res.ok) {
+        const data = await res.json();
         throw new Error(data.error || "Failed to create post");
       }
 
@@ -70,7 +70,7 @@ export default function AddPost() {
       }, 2000);
     } catch (error) {
       console.error("Error creating post:", error);
-      setError(error.message || "Failed to create post");
+      setError(error.message);
     } finally {
       setIsLoading(false);
     }

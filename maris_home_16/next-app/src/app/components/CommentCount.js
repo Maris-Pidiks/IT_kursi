@@ -20,7 +20,6 @@ export default function CommentCount({ postId, initialCount = 0 }) {
 
     fetchCount();
 
-    // Listen for comment updates
     const handleCommentChange = () => fetchCount();
     window.addEventListener("commentChanged", handleCommentChange);
     return () => window.removeEventListener("commentChanged", handleCommentChange);

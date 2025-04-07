@@ -3,51 +3,24 @@ import Link from "next/link";
 import LoadingState from "@/app/components/LoadingState";
 import CommentCount from "@/app/components/CommentCount";
 
-async function getData() {
+async function getPosts() {
   try {
-    // Fetch posts
-    const response = await fetch("http://localhost:3000/api/posts", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const posts = await response.json();
-
-    // Fetch comment counts for each post
-    const postsWithComments = await Promise.all(
-      posts.map(async (post) => {
-        const commentsResponse = await fetch(
-          `http://localhost:3000/api/comments?postId=${post._id}`, // Use _id instead of id
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            cache: "no-store",
-          }
-        );
-
-        let commentCount = 0;
-        if (commentsResponse.ok) {
-          const comments = await commentsResponse.json();
-          commentCount = Array.isArray(comments) ? comments.length : 0;
-        }
-
-        return {
-          ...post,
-          commentCount,
-        };
-      })
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/posts` || "/api/posts",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-store",
+      }
     );
 
-    return postsWithComments;
+    if (!response.ok) {
+      throw new Error(`Failed to fetch posts: ${response.statusText}`);
+    }
+
+    return await response.json();
   } catch (error) {
     console.error("Error fetching posts:", error);
     return [];
@@ -55,11 +28,11 @@ async function getData() {
 }
 
 export default async function BlogPage() {
-  const posts = await getData();
+  const posts = await getPosts();
 
   const truncateText = (text, limit) => {
-    if (text.length <= limit) return text;
-    return text.slice(0, limit) + "...";
+    if (text?.length <= limit) return text;
+    return text?.slice(0, limit) + "...";
   };
 
   return (
@@ -81,10 +54,7 @@ export default async function BlogPage() {
                   </div>
                   <p>{truncateText(post.description, 150)}</p>
                   <div className="card-actions justify-between mt-4">
-                    <CommentCount
-                      postId={post._id}
-                      initialCount={post.commentCount || 0}
-                    />
+                    <CommentCount postId={post._id} initialCount={0} />
                     <Link
                       href={`/blog/${post.slug}`}
                       className="btn btn-success btn-sm text-white"

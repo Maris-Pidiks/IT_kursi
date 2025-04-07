@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "@/utils/mongoose";
-import Comment from "@/utils/models/Comment";
+
+import { connectToDatabase } from "@/lib/db.js";
+import Comment from "@/lib/models/Comment";
 
 export async function GET(request) {
   try {
