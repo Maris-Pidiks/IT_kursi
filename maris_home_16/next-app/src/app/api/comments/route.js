@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/db";
-import Comment from "@/models/Comment";
+import Comment from "@/lib/models/Comment";
 
 export async function GET(request) {
   try {
