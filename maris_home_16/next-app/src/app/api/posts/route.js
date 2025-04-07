@@ -1,20 +1,6 @@
 import { NextResponse } from "next/server";
-
 import { connectToDatabase } from "@/lib/db";
 import Post from "@/lib/models/Post";
-
-export async function GET() {
-  try {
-    await connectToDatabase();
-
-    const posts = await Post.find().sort({ createdAt: -1 }).lean();
-
-    return NextResponse.json(posts);
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    return NextResponse.json({ error: "Failed to fetch posts" }, { status: 500 });
-  }
-}
 
 export async function POST(request) {
   try {
@@ -22,34 +8,34 @@ export async function POST(request) {
 
     const body = await request.json();
 
-    if (!body.title || !body.description) {
+    // Validate required fields
+    if (!body.title?.trim() || !body.description?.trim()) {
       return NextResponse.json(
         { error: "Title and description are required" },
         { status: 400 }
       );
     }
 
-    // Create post with timestamps
+    // Create new post
     const post = await Post.create({
-      ...body,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      title: body.title.trim(),
+      description: body.description.trim(),
+      slug: body.slug,
+      img: body.img,
     });
 
-    // Convert _id to string and remove __v
-    const sanitizedPost = {
-      ...post.toObject(),
-      id: post._id.toString(),
-      _id: undefined,
-      __v: undefined,
-    };
-
-    return NextResponse.json(sanitizedPost, { status: 201 });
+    return NextResponse.json(post, { status: 201 });
   } catch (error) {
     console.error("Error creating post:", error);
-    return NextResponse.json(
-      { error: error.message || "Failed to create post" },
-      { status: 500 }
-    );
+
+    // Check for duplicate slug error
+    if (error.code === 11000) {
+      return NextResponse.json(
+        { error: "A post with this title already exists" },
+        { status: 409 }
+      );
+    }
+
+    return NextResponse.json({ error: "Failed to create post" }, { status: 500 });
   }
 }
