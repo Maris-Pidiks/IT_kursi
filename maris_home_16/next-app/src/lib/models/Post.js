@@ -54,4 +54,4 @@ PostSchema.post("save", function (error, doc, next) {
 });
 
 const Post = mongoose.models.Post || mongoose.model("Post", PostSchema);
-export default Post;
+export default mongoose.models.Post || mongoose.model("Post", PostSchema);
