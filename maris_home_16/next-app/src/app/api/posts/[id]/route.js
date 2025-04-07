@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
+
 import { connectToDatabase } from "@/lib/db";
 import Post from "@/models/Post";
+
 import mongoose from "mongoose";
 
 export async function GET(request, { params }) {

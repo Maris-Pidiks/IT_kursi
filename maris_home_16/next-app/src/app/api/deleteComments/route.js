@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+
 import { connectToDatabase } from "@/lib/db";
 import Comment from "@/models/Comment";
 import mongoose from "mongoose";
@@ -7,10 +8,6 @@ export async function DELETE(request, { params }) {
   try {
     await connectToDatabase();
     const { id } = params;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return NextResponse.json({ error: "Invalid comment ID" }, { status: 400 });
-    }
 
     const deletedComment = await Comment.findByIdAndDelete(id);
 
