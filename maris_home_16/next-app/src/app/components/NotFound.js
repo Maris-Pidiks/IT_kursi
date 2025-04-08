@@ -7,7 +7,7 @@ export default function NotFound() {
         <div className="bg-white rounded-lg shadow-xl p-8">
           <h2 className="text-4xl font-bold mb-4">Post Not Found</h2>
           <p className="text-gray-600 mb-8">
-            Sorry, we couldn't find the post you're looking for.
+            Sorry, we could not find the post you are looking for.
           </p>
           <Link
             href="/blog"
