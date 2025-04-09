@@ -6,32 +6,17 @@ const CommentSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post",
       required: true,
+      index: true,
     },
-    name: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    comment: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    name: String,
+    comment: String,
     likes: {
       type: Number,
       default: 0,
-      min: 0,
-    },
-    commentCount: {
-      type: Number,
-      default: 0,
-      min: 0,
     },
   },
   {
     timestamps: true,
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
   }
 );
 

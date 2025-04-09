@@ -12,22 +12,26 @@ async function getPostsWithComments() {
   try {
     await connectToDatabase();
 
-    // Fetch posts
+    // Fetch posts with lean() for better performance
     const posts = await Post.find({}).sort({ createdAt: -1 }).lean().exec();
 
     // Fetch comment counts for all posts
     const commentCounts = await Promise.all(
       posts.map(async (post) => {
         const count = await Comment.countDocuments({ postId: post._id });
-        return { postId: post._id.toString(), count };
+        return {
+          postId: post._id.toString(),
+          count,
+        };
       })
     );
 
-    // Convert to plain objects and add comment counts
-    const plainPosts = convertToPlainObject(posts);
-    const postsWithComments = plainPosts.map((post) => ({
+    // Convert posts to plain objects and add comment counts
+    const postsWithComments = posts.map((post) => ({
       ...post,
-      commentCount: commentCounts.find((c) => c.postId === post.id)?.count || 0,
+      _id: post._id.toString(), // Convert ObjectId to string
+      commentCount:
+        commentCounts.find((c) => c.postId === post._id.toString())?.count || 0,
     }));
 
     return postsWithComments;
