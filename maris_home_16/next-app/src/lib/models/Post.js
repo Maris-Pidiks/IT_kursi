@@ -19,11 +19,12 @@ const PostSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
     },
-    img: {
-      type: String,
-      default: "https://via.placeholder.com/800x400",
-    },
     likes: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    commentCount: {
       type: Number,
       default: 0,
       min: 0,

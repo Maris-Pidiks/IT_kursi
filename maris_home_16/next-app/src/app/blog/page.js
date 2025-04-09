@@ -70,7 +70,8 @@ export default async function BlogPage() {
                         initialCount={post.commentCount}
                       />
                       <LikeButton
-                        postId={post._id.toString()}
+                        id={post._id}
+                        type="post"
                         initialLikes={post.likes || 0}
                       />
                     </div>
