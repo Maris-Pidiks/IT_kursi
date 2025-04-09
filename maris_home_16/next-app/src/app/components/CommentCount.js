@@ -1,29 +1,21 @@
-"use client";
-
-import { useState, useEffect } from "react";
-
-export default function CommentCount({ postId, initialCount = 0 }) {
-  const [count, setCount] = useState(initialCount);
-
-  useEffect(() => {
-    const fetchCount = async () => {
-      try {
-        const res = await fetch(`/api/comments?postId=${postId}`);
-        if (res.ok) {
-          const comments = await res.json();
-          setCount(Array.isArray(comments) ? comments.length : 0);
-        }
-      } catch (error) {
-        console.error("Error fetching comment count:", error);
-      }
-    };
-
-    fetchCount();
-
-    const handleCommentChange = () => fetchCount();
-    window.addEventListener("commentChanged", handleCommentChange);
-    return () => window.removeEventListener("commentChanged", handleCommentChange);
-  }, [postId]);
-
-  return <span className="text-gray-600 text-sm">Comments ({count})</span>;
+export default function CommentCount({ postId, initialCount }) {
+  return (
+    <div className="flex items-center gap-2">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+        />
+      </svg>
+      <span>{initialCount}</span>
+    </div>
+  );
 }

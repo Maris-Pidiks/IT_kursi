@@ -1,25 +1,44 @@
 import { connectToDatabase, convertToPlainObject } from "@/lib/db";
 import Post from "@/lib/models/Post";
+import Comment from "@/lib/models/Comment";
 import Link from "next/link";
-import LoadingState from "@/app/components/LoadingState";
 import CommentCount from "@/app/components/CommentCount";
 import LikeButton from "@/app/components/LikeButton";
+import LoadingState from "@/app/components/LoadingState";
 
-async function getPosts() {
+export const revalidate = 0;
+
+async function getPostsWithComments() {
   try {
     await connectToDatabase();
+
+    // Fetch posts
     const posts = await Post.find({}).sort({ createdAt: -1 }).lean().exec();
+
+    // Fetch comment counts for all posts
+    const commentCounts = await Promise.all(
+      posts.map(async (post) => {
+        const count = await Comment.countDocuments({ postId: post._id });
+        return { postId: post._id.toString(), count };
+      })
+    );
+
+    // Convert to plain objects and add comment counts
     const plainPosts = convertToPlainObject(posts);
-    console.log("Fetched posts:", plainPosts); // Debug log
-    return plainPosts;
+    const postsWithComments = plainPosts.map((post) => ({
+      ...post,
+      commentCount: commentCounts.find((c) => c.postId === post.id)?.count || 0,
+    }));
+
+    return postsWithComments;
   } catch (error) {
-    console.error("Error fetching posts:", error);
+    console.error("Error fetching posts and comments:", error);
     return [];
   }
 }
 
 export default async function BlogPage() {
-  const posts = await getPosts();
+  const posts = await getPostsWithComments();
 
   const truncateText = (text, limit) => {
     if (!text) return "";
@@ -38,7 +57,7 @@ export default async function BlogPage() {
           <div className="grid gap-4">
             {posts.map((post) => (
               <div
-                key={post._id?.toString() || post.id}
+                key={post._id.toString()}
                 className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-200"
               >
                 <div className="card-body">
@@ -47,11 +66,11 @@ export default async function BlogPage() {
                   <div className="card-actions justify-between mt-4">
                     <div className="flex items-center gap-4">
                       <CommentCount
-                        postId={post._id?.toString() || post.id}
-                        initialCount={0}
+                        postId={post._id.toString()}
+                        initialCount={post.commentCount}
                       />
                       <LikeButton
-                        postId={post._id?.toString() || post.id}
+                        postId={post._id.toString()}
                         initialLikes={post.likes || 0}
                       />
                     </div>
