@@ -1,51 +1,36 @@
 import React from "react";
 import Image from "next/image";
 
-function ResultUsers({ users }) {
+export default function ResultUsers({ users }) {
   return (
-    <div className="container mx-auto p-4 justify-center">
-      <div
-        className={`grid ${
-          users.length === 1
-            ? "grid-cols-1"
-            : users.length === 2
-            ? "grid-cols-2"
-            : users.length === 3
-            ? "grid-cols-3"
-            : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-        } gap-4`}
-      >
-        {users.map((user) => (
-          <div key={user.id} className="card bg-base-100 shadow-md">
-            <figure>
-              <Image
-                src={user.avatar_url}
-                alt={user.login}
-                width={200}
-                height={200}
-                className="mt-5 mx-5 h-48 object-cover rounded-full"
-              />
-            </figure>
-            <div className="card-body justify-center">
-              <h2 className="card-title justify-center text-2xl leading-tight">
-                {user.login}
-              </h2>
-              <div className="card-actions justify-center">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+      {users.map((user) => (
+        <div
+          key={user.id}
+          className="card bg-base-200 shadow-sm hover:shadow-md transition-shadow"
+        >
+          <div className="card-body p-4">
+            <div className="flex items-center gap-4">
+              <div className="avatar">
+                <div className="w-16 rounded-full">
+                  <Image src={user.avatar_url} alt={user.login} />
+                </div>
+              </div>
+              <div>
+                <h2 className="card-title text-lg">{user.login}</h2>
                 <a
                   href={user.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-success text-white mt-2"
+                  className="link link-success text-sm"
                 >
                   View Profile
                 </a>
               </div>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }
-
-export default ResultUsers;

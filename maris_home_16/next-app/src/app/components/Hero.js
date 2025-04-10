@@ -15,8 +15,8 @@ export default function Hero() {
         <div className="max-w-md">
           <h1 className="text-5xl font-bold text-white">Next JS Projects</h1>
           <p className="text-2xl py-6 text-white">This is my first next app.</p>
-          <Link href="/pages/Githubusers" className="btn btn-success text-white">
-            Projects
+          <Link href="./blog" className="btn btn-success text-white ml-4 p-5 text-xl">
+            Blog
           </Link>
         </div>
       </div>

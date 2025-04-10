@@ -27,9 +27,10 @@ const nextConfig = {
         hostname: "i.scdn.co",
         pathname: "/**",
       },
+
       {
         protocol: "https",
-        hostname: "via.placeholder.com",
+        hostname: "cdn.diena.lv",
         pathname: "/**",
       },
       {

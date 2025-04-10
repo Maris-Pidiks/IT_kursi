@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function NotFoundComponent() {
+export default function NotFound() {
   return (
     <div className="container w-full max-w-full mx-auto p-4 flex justify-center min-h-screen bg-base-200 px-5 md:px-20">
       <div className="container max-w-3xl mx-auto p-4 text-center">

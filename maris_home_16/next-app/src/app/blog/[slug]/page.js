@@ -8,6 +8,7 @@ import LoadingState from "@/app/components/LoadingState";
 import AddComment from "@/app/components/AddComment";
 import CommentList from "@/app/components/CommentList";
 import DeleteButton from "@/app/components/DeleteButton";
+import Image from "next/image";
 
 async function getPostWithComments(slug) {
   try {
@@ -65,6 +66,18 @@ export default async function PostPage({ params }) {
             <div className="flex justify-between items-start">
               <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
             </div>
+            {post.img && (
+              <div className="mb-6">
+                <Image
+                  src={post.img}
+                  alt={post.title}
+                  width={800}
+                  height={400}
+                  formats={["image/jpeg", "image/webp"]}
+                  className="object-cover object-center"
+                />
+              </div>
+            )}
             <div className="prose max-w-none mb-6">
               <p>{post.description}</p>
             </div>
