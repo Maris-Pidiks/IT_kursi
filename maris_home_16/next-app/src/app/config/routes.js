@@ -5,6 +5,5 @@ export const routes = [
   { href: "/Weather", label: "Weather" },
   { href: "/Spotify", label: "Spotify" },
   { href: "/games", label: "Games" },
-  { href: "/add-post", label: "Add Post" },
   { href: "/blog", label: "Blog" },
 ];

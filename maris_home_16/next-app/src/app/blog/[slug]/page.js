@@ -7,6 +7,7 @@ import LikeButton from "@/app/components/LikeButton";
 import LoadingState from "@/app/components/LoadingState";
 import AddComment from "@/app/components/AddComment";
 import CommentList from "@/app/components/CommentList";
+import DeleteButton from "@/app/components/DeleteButton";
 
 async function getPostWithComments(slug) {
   try {
@@ -61,7 +62,9 @@ export default async function PostPage({ params }) {
       <div className="container max-w-3xl mx-auto p-4">
         <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-200">
           <div className="card-body">
-            <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+            <div className="flex justify-between items-start">
+              <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+            </div>
             <div className="prose max-w-none mb-6">
               <p>{post.description}</p>
             </div>
@@ -69,6 +72,7 @@ export default async function PostPage({ params }) {
               <div className="flex items-center gap-4">
                 <CommentCount postId={post._id} initialCount={post.commentCount} />
                 <LikeButton id={post._id} type="post" initialLikes={post.likes || 0} />
+                <DeleteButton id={post._id} type="post" />
               </div>
               <Link href="/blog" className="btn btn-success btn-sm text-white">
                 ← Back to Blog

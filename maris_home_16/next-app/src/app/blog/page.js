@@ -52,7 +52,12 @@ export default async function BlogPage() {
   return (
     <div className="container w-full max-w-full mx-auto p-4 flex justify-center min-h-screen bg-base-200 px-5 md:px-20">
       <div className="container max-w-3xl mx-auto p-4">
-        <h1 className="text-5xl font-bold my-10">Blog Posts</h1>
+        <div className="flex justify-between items-center my-5">
+          <h1 className="text-5xl font-bold">Blog Posts</h1>
+        </div>
+        <Link href="/add-post" className="btn btn-success btn-sm text-white mt-5 mb-10">
+          Add Post
+        </Link>
         {!posts || posts.length === 0 ? (
           <div className="text-center py-10">
             <LoadingState />
