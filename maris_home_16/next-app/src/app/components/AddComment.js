@@ -50,9 +50,11 @@ export default function AddComment({ postId }) {
         className="textarea textarea-bordered w-full h-24"
         required
       />
-      <button type="submit" className="btn btn-success btn-sm text-white">
-        Add Comment
-      </button>
+      <div className="flex justify-end">
+        <button type="submit" className="btn btn-success btn-sm text-white">
+          Add Comment
+        </button>
+      </div>
     </form>
   );
 }
