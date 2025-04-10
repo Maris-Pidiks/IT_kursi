@@ -3,14 +3,13 @@
 import { useRouter } from "next/navigation";
 import LikeButton from "./LikeButton";
 
-// Helper function for consistent date formatting
-function formatDate(date) {
+const formatDate = (date) => {
   return new Date(date).toLocaleDateString("lv-LV", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
   });
-}
+};
 
 export default function CommentList({ comments }) {
   const router = useRouter();
@@ -29,7 +28,7 @@ export default function CommentList({ comments }) {
         throw new Error("Failed to delete comment");
       }
 
-      router.refresh(); // Refresh the page to update comment count
+      router.refresh();
     } catch (error) {
       console.error("Error deleting comment:", error);
     }
@@ -41,23 +40,23 @@ export default function CommentList({ comments }) {
         <div key={comment._id} className="card bg-base-100 shadow-sm">
           <div className="card-body border-b border-base-300">
             <div className="flex justify-between items-start">
-              <h3 className="font-bold">{comment.name}</h3>
-              <div className="flex items-center gap-4">
-                <LikeButton
-                  id={comment._id}
-                  type="comment"
-                  initialLikes={comment.likes || 0}
-                />
+              <div className="flex items-center gap-3">
+                <h3 className="font-bold">{comment.name}</h3>
               </div>
             </div>
             <p className="mt-2">{comment.comment}</p>
-            <div className="card-actions justify-between mt-4">
-              <span className="text-sm text-gray-400">
+            <div className="card-actions justify-start mt-4">
+              <span className="text-sm text-gray-600 mr-3">
                 {formatDate(comment.createdAt)}
               </span>
+              <LikeButton
+                id={comment._id}
+                type="comment"
+                initialLikes={comment.likes || 0}
+              />
               <button
                 onClick={() => handleDelete(comment._id, comment.postId)}
-                className="text-error hover:text-error-focus transition-colors"
+                className="text-error hover:text-error-focus transition-colors ml-3"
                 aria-label="Delete comment"
               >
                 <svg

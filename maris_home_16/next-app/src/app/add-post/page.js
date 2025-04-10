@@ -62,12 +62,13 @@ export default function AddPost() {
         img: "",
       });
 
-      setSuccess("Post successfully added!");
+      setSuccess("Post successfully added! Redirecting to blog...");
 
+      // Redirect after short delay to show success message
       setTimeout(() => {
         router.push("/blog");
         router.refresh();
-      }, 2000);
+      }, 1000);
     } catch (error) {
       console.error("Error creating post:", error);
       setError(error.message);
@@ -95,7 +96,7 @@ export default function AddPost() {
 
         <form onSubmit={onSubmitHandler} className="bg-white p-6 rounded-lg shadow-xl">
           <div className="form-control mb-4">
-            <label className="label">
+            <label className="label  mb-2">
               <span className="label-text">Title</span>
             </label>
             <input
@@ -111,7 +112,7 @@ export default function AddPost() {
           </div>
 
           <div className="form-control mb-4">
-            <label className="label">
+            <label className="label  mb-2">
               <span className="label-text">Description</span>
             </label>
             <input
@@ -127,7 +128,7 @@ export default function AddPost() {
           </div>
 
           <div className="form-control mb-4">
-            <label className="label">
+            <label className="label  mb-2">
               <span className="label-text">Image URL (optional)</span>
             </label>
             <input
@@ -139,7 +140,7 @@ export default function AddPost() {
               value={formdata.img}
               disabled={isLoading}
             />
-            <label className="label">
+            <label className="label  mt-2">
               <span className="label-text-alt text-gray-500">
                 Leave empty to use default image
               </span>
