@@ -11,7 +11,7 @@ export default function SearchUsersForm({ onSearch }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex max-w-[500px] gap-2 mb-10 mx-auto">
+    <form onSubmit={handleSubmit} className="flex max-w-[500px] gap-2 mb-10 mx-auto ">
       <input
         type="text"
         value={query}

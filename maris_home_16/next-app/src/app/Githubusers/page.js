@@ -31,8 +31,8 @@ export default function GithubUsers() {
   };
 
   return (
-    <div className="con2tainer max-w-6xl mx-auto">
-      <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-200 w-full mt-10 ">
+    <div className="min-w-sm mx-auto">
+      <div className="container max-w-6xl mx-auto mt-20 ">
         <h1 className="text-4xl font-bold text-center mt-10 mb-8">GitHub Users Search</h1>
 
         <SearchUsersForm onSearch={handleSearch} />
@@ -50,12 +50,9 @@ export default function GithubUsers() {
         )}
 
         {users.length > 0 && !isLoading && (
-          <div className="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4  justify-center gap-4 p-10">
+          <div className="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 justify-center gap-4 p-10">
             {users.map((user) => (
-              <div
-                key={user.id}
-                className="card bg-base-200 shadow-sm hover:shadow-md transition-shadow"
-              >
+              <div key={user.id} className="card bg-base-300 shadow-sm ">
                 <div className="card-body p-8">
                   <div className="flex flex-col justify-center items-center gap-8">
                     <div className="avatar">
@@ -69,7 +66,7 @@ export default function GithubUsers() {
                         />
                       </div>
                     </div>
-                    <div>
+                    <div className="flex flex-col items-center">
                       <h2 className="card-title text-2xl mb-3 justify-center mx-auto">
                         {user.login}
                       </h2>

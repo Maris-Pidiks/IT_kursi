@@ -15,7 +15,9 @@ export default function RootLayout({ children }) {
       <body className={GeistSans.className}>
         <div className="min-h-screen flex flex-col bg-base-200">
           <Navbar />
-          <main className="flex-grow container mx-auto px-4 py-8">{children}</main>
+          <div className="w-full">
+            <main className="container min-w-full mx-auto">{children}</main>
+          </div>
           <Footer />
           <BackToTop />
         </div>

@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="footer flex flex-col footer-center bg-neutral-200 text-black p-10">
+    <footer className="footer flex flex-col footer-center bg-neutral-200 text-black p-10 justify-self-end">
       <aside>
         <p className="font-bold">
           ACME Industries Ltd. / Providing reliable tech since 1992
