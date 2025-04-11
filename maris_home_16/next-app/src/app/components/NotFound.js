@@ -9,7 +9,7 @@ export default function NotFoundComponent() {
             <h2 className="text-5xl font-bold mb-4">404</h2>
             <p className="text-2xl mb-8">Page Not Found</p>
             <p className="text-gray-600 mb-8">
-              The page you are looking for doesn't exist or has been moved.
+              The page you are looking for does not exist or has been moved.
             </p>
             <div className="flex justify-center gap-4">
               <Link href="/" className="btn btn-success btn-sm text-white">
